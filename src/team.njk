@@ -1,0 +1,20 @@
+---
+layout: base.njk
+title: Our Team
+permalink: /team/
+---
+<section class="page-head"><div class="wrap"><p class="eyebrow">Who we are</p><h1>Our Team</h1><p class="lede">A boutique team built on referrals and long-term relationships.</p></div></section>
+<section class="section tight"><div class="wrap">
+  {% for m in team %}
+  <div class="member">
+    <div class="member-photo">{% if m.photo %}<img src="{{ m.photo }}" alt="{{ m.name }}" width="600" height="750">{% else %}<span>{{ m.name | initials }}</span>{% endif %}</div>
+    <div>
+      <p class="eyebrow">{{ m.role }}</p>
+      <h2>{{ m.name }}</h2>
+      <p>{{ m.bio }}</p>
+      <p class="muted">{% if m.phone %}<a href="tel:{{ m.phone }}">{{ m.phone }}</a> · {% endif %}{% if m.email %}<a href="mailto:{{ m.email }}">{{ m.email }}</a>{% endif %}{% if m.license %}<br>WA License #{{ m.license }}{% endif %}</p>
+    </div>
+  </div>
+  {% endfor %}
+</div></section>
+{% include "cta.njk" %}

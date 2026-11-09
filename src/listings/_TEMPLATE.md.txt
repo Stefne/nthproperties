@@ -1,0 +1,28 @@
+---
+# Copy this file to src/listings/<street-address-city>.md (example: 123-main-st-bellevue.md).
+# The file name becomes the page URL: /listings/123-main-st-bellevue/
+title: 123 Main St NE          # street address, shown as the heading
+status: Active                 # Active | Coming Soon | Pending | Sold
+featured: true                 # true = shown on the home page
+price: 1250000                 # numbers only, no $ or commas
+beds: 4
+baths: 2.5
+sqft: 2850
+lot: 7,200 sq ft
+type: Single Family            # Single Family | Condo | Townhome | Multi-Family | Land
+yearBuilt: 1998
+city: Bellevue                 # must match an area name to appear on that area page
+state: WA
+zip: "98004"
+neighborhood: West Bellevue
+mls: ""                        # NWMLS number once listed
+listed: 2026-11-01             # list date, used for sorting
+summary: One sentence used for search results and link previews.
+photos:                        # put images in src/assets/img/listings/<slug>/ ; first photo is the cover
+  - /assets/img/listings/123-main-st-bellevue/01.jpg
+features:
+  - Updated kitchen with quartz counters
+  - Primary suite with walk-in closet
+tour: ""                       # optional Matterport or YouTube embed URL
+---
+Write the property description here in plain paragraphs.

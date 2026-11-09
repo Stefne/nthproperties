@@ -1,0 +1,44 @@
+---
+layout: base.njk
+---
+{% set mapq = (title + ", " + city + ", " + (state or "WA") + " " + (zip or "")) | urlencode %}
+<section class="listing-hero">
+  <div class="gallery" data-gallery>
+    <img class="gallery-main" src="{{ photos[0] if photos else '/assets/img/placeholder.svg' }}" alt="{{ title }}" width="1600" height="1000">
+    {% if photos and photos.length > 1 %}
+    <div class="thumbs">{% for p in photos %}<button type="button" data-src="{{ p }}"{% if loop.first %} class="on"{% endif %}><img src="{{ p }}" alt="Photo {{ loop.index }}" loading="lazy" width="160" height="100"></button>{% endfor %}</div>
+    {% endif %}
+  </div>
+</section>
+<section class="section">
+  <div class="wrap listing-grid">
+    <div>
+      <span class="badge badge-{{ status | slug2 }}">{{ status }}</span>
+      <h1 class="listing-title">{{ title }}</h1>
+      <p class="muted">{% if neighborhood %}{{ neighborhood }} · {% endif %}{{ city }}, {{ state or "WA" }} {{ zip }}</p>
+      <p class="price big">{{ price | money }}</p>
+      <dl class="specs">
+        {% if beds %}<div><dt>Beds</dt><dd>{{ beds }}</dd></div>{% endif %}
+        {% if baths %}<div><dt>Baths</dt><dd>{{ baths }}</dd></div>{% endif %}
+        {% if sqft %}<div><dt>Sq Ft</dt><dd>{{ sqft | num }}</dd></div>{% endif %}
+        {% if lot %}<div><dt>Lot</dt><dd>{{ lot }}</dd></div>{% endif %}
+        {% if type %}<div><dt>Type</dt><dd>{{ type }}</dd></div>{% endif %}
+        {% if yearBuilt %}<div><dt>Built</dt><dd>{{ yearBuilt }}</dd></div>{% endif %}
+      </dl>
+      <div class="prose">{{ content | safe }}</div>
+      {% if features %}<h2 class="h3">Features</h2><ul class="features">{% for f in features %}<li>{{ f }}</li>{% endfor %}</ul>{% endif %}
+      {% if tour %}<h2 class="h3">Virtual Tour</h2><div class="embed"><iframe src="{{ tour }}" title="Virtual tour" loading="lazy" allowfullscreen></iframe></div>{% endif %}
+      <h2 class="h3">Location</h2>
+      <div class="embed"><iframe src="https://www.google.com/maps?q={{ mapq }}&output=embed" title="Map" loading="lazy"></iframe></div>
+      {% if mls %}<p class="fine">MLS# {{ mls }}</p>{% endif %}
+    </div>
+    <aside class="inquiry">
+      <h2 class="h3">Interested in this home?</h2>
+      <p class="muted">Ask a question or schedule a private showing.</p>
+      {% set inquiryTopic = "Listing: " + title + ", " + city %}
+      {% include "form.njk" %}
+      <p class="center"><a href="tel:{{ site.phone | replace(r/[^0-9+]/g, '') }}">or call {{ site.phone }}</a></p>
+    </aside>
+  </div>
+</section>
+{% include "cta.njk" %}

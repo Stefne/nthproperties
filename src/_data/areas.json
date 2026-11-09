@@ -1,0 +1,14 @@
+[
+  { "slug": "seattle", "name": "Seattle", "county": "King County",
+    "blurb": "From Capitol Hill condos to Ballard craftsmans and West Seattle view homes, Seattle prices move block by block. We help you read the micro-market before you write an offer or set a list price.",
+    "points": ["Neighborhood-level pricing, not citywide averages", "Condo HOA and reserve-study review", "ADU/DADU potential under current zoning"] },
+  { "slug": "bellevue", "name": "Bellevue", "county": "King County",
+    "blurb": "Eastside demand runs on schools, commute, and tech employment. Bellevue rewards preparation: clean pre-inspection, sharp pricing, and a plan for multiple-offer situations.",
+    "points": ["Strategy for competitive and multiple-offer markets", "School-boundary and commute analysis", "New construction and teardown evaluation"] },
+  { "slug": "kent", "name": "Kent", "county": "King County",
+    "blurb": "Kent offers more space for the money and a strong rental base, which makes it a common first home and first investment for our clients.",
+    "points": ["First-time buyer guidance", "Rental and cash-flow analysis", "Land and infill development opportunities"] },
+  { "slug": "tacoma", "name": "Tacoma", "county": "Pierce County",
+    "blurb": "Tacoma pairs character homes and waterfront neighborhoods with pricing below King County, drawing both owner-occupants and investors.",
+    "points": ["Value comparison against King County options", "Investment and multi-family analysis", "Short-term rental feasibility"] }
+]

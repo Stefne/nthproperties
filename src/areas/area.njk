@@ -1,0 +1,18 @@
+---
+layout: base.njk
+pagination: { data: areas, size: 1, alias: area }
+permalink: "/areas/{{ area.slug }}/"
+eleventyComputed:
+  title: "{{ area.name }} Real Estate"
+  summary: "{{ area.blurb }}"
+---
+<section class="page-head"><div class="wrap"><p class="eyebrow">{{ area.county }}</p><h1>{{ area.name }}</h1><p class="lede">{{ area.blurb }}</p></div></section>
+<section class="section tight"><div class="wrap split">
+  <div><h2 class="h3">How we help in {{ area.name }}</h2></div>
+  <ul class="features">{% for p in area.points %}<li>{{ p }}</li>{% endfor %}</ul>
+</div></section>
+{% set local = collections.listings | inCity(area.name) %}
+{% if local.length %}
+<section class="section alt"><div class="wrap"><h2>{{ area.name }} listings</h2><div class="grid cards">{% for item in local %}{% include "card.njk" %}{% endfor %}</div></div></section>
+{% endif %}
+{% include "cta.njk" %}

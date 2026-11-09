@@ -1,0 +1,10 @@
+---
+layout: base.njk
+title: Areas We Serve
+permalink: /areas/
+---
+<section class="page-head"><div class="wrap"><p class="eyebrow">Where we work</p><h1>Areas We Serve</h1><p class="lede">Prices move block by block. Here's how we think about each market.</p></div></section>
+<section class="section tight"><div class="wrap grid two">
+  {% for a in areas %}<a class="area-card" href="/areas/{{ a.slug }}/"><span class="eyebrow">{{ a.county }}</span><h2 class="h3">{{ a.name }}</h2><p>{{ a.blurb }}</p><span class="link-arrow">Explore {{ a.name }}</span></a>{% endfor %}
+</div></section>
+{% include "cta.njk" %}

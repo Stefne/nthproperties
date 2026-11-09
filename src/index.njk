@@ -1,0 +1,72 @@
+---
+layout: base.njk
+transparentHeader: true
+bodyClass: home
+---
+<section class="hero"{% if site.heroImage %} style="--hero:url('{{ site.heroImage }}')"{% endif %}>
+  <div class="wrap hero-inner">
+    <p class="eyebrow light">Greater Seattle · Eastside · South Sound</p>
+    <h1>Real estate, guided by people who build, invest, and live here.</h1>
+    <p class="lede">Buying, selling, investing, or managing property, Nth Properties brings local knowledge and a long-term plan to every move.</p>
+    <div class="hero-ctas"><a class="btn btn-light" href="/listings/">View Listings</a><a class="btn btn-ghost" href="/contact/?topic=consultation">Free Consultation</a></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">A boutique real estate team</p>
+      <h2>Local knowledge. Broader perspective.</h2>
+    </div>
+    <div>
+      <p>Most of our business comes from referrals, which means every client gets the kind of care that earns one. We have helped clients buy a first home, grow into a first investment, and keep building from there.</p>
+      <p>Our experience spans single-family, multi-family, land, construction, and short- and long-term rentals, so the advice you get accounts for what a property can become, not just what it is today.</p>
+      <a class="link-arrow" href="/team/">Meet the team</a>
+    </div>
+  </div>
+</section>
+
+{% set feat = collections.listings | featured %}
+{% if feat.length %}
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head"><div><p class="eyebrow">Featured Properties</p><h2>Our listings. Your opportunity.</h2></div><a class="link-arrow" href="/listings/">All listings</a></div>
+    <div class="grid cards">{% for item in feat | head(6) %}{% include "card.njk" %}{% endfor %}</div>
+  </div>
+</section>
+{% endif %}
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><div><p class="eyebrow">What we do</p><h2>Full-service real estate</h2></div><a class="link-arrow" href="/services/">All services</a></div>
+    <div class="grid three">{% for s in services %}<div class="tile"><span class="tile-num">0{{ loop.index }}</span><h3>{{ s.title }}</h3><p>{{ s.text }}</p></div>{% endfor %}</div>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="wrap">
+    <div class="section-head"><div><p class="eyebrow light">Where we work</p><h2>Explore the Puget Sound</h2></div></div>
+    <div class="grid four">{% for a in areas %}<a class="area-tile" href="/areas/{{ a.slug }}/"><span class="muted-light">{{ a.county }}</span><strong>{{ a.name }}</strong><span class="link-arrow">Explore</span></a>{% endfor %}</div>
+  </div>
+</section>
+
+{% if site.showTestimonials %}
+<section class="section">
+  <div class="wrap">
+    <p class="eyebrow center">Trusted by our clients</p>
+    <div class="grid three">{% for t in testimonials %}<blockquote class="quote"><p>“{{ t.quote }}”</p><footer><strong>{{ t.name }}</strong><span class="muted">{{ t.detail }}</span></footer></blockquote>{% endfor %}</div>
+  </div>
+</section>
+{% endif %}
+
+{% if collections.posts.length %}
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head"><div><p class="eyebrow">Market Insight</p><h2>From the blog</h2></div><a class="link-arrow" href="/blog/">All posts</a></div>
+    <div class="grid three">{% for p in collections.posts | head(3) %}<a class="post-tile" href="{{ p.url }}"><span class="muted">{{ p.date | longDate }}</span><h3>{{ p.data.title }}</h3><p>{{ p.data.summary }}</p></a>{% endfor %}</div>
+  </div>
+</section>
+{% endif %}
+
+{% include "cta.njk" %}
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"RealEstateAgent","name":"{{ site.name }}","url":"{{ site.url }}","telephone":"{{ site.phone }}","areaServed":[{% for a in areas %}"{{ a.name }}, WA"{% if not loop.last %},{% endif %}{% endfor %}]}</script>

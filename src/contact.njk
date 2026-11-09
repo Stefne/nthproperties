@@ -1,0 +1,14 @@
+---
+layout: base.njk
+title: Contact
+permalink: /contact/
+---
+<section class="page-head"><div class="wrap"><p class="eyebrow">Get in touch</p><h1>Let's talk.</h1><p class="lede">Tell us a little about what you're planning. We'll reply within one business day.</p></div></section>
+<section class="section tight"><div class="wrap split">
+  <div>
+    <h2 class="h3">Call or text</h2><p><a class="big-link" href="tel:{{ site.phone | replace(r/[^0-9+]/g, '') }}">{{ site.phone }}</a></p>
+    {% if site.email %}<h2 class="h3">Email</h2><p><a class="big-link" href="mailto:{{ site.email }}">{{ site.email }}</a></p>{% endif %}
+    {% if site.brokerageAddress %}<h2 class="h3">Office</h2><p>{{ site.brokerageAddress }}</p>{% endif %}
+  </div>
+  <div class="inquiry">{% include "form.njk" %}</div>
+</div></section>

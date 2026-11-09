@@ -1,0 +1,11 @@
+---
+layout: base.njk
+---
+<article class="section">
+  <div class="wrap narrow">
+    <p class="eyebrow"><a href="/blog/">Blog</a> · {{ page.date | longDate }}</p>
+    <h1>{{ title }}</h1>
+    <div class="prose">{{ content | safe }}</div>
+  </div>
+</article>
+{% include "cta.njk" %}

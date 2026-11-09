@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% set pageTitle = (title + " | " + site.name) if title else (site.name + " | Greater Seattle Real Estate") %}
+{% set pageDesc = summary or description or site.description %}
+<title>{{ pageTitle }}</title>
+<meta name="description" content="{{ pageDesc }}">
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ pageTitle }}">
+<meta property="og:description" content="{{ pageDesc }}">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta property="og:image" content="{{ site.url }}{{ (photos[0] if photos else '/assets/img/og.png') }}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+{% block head %}{% endblock %}
+</head>
+<body class="{{ bodyClass }}">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header{% if transparentHeader %} is-over-hero{% endif %}">
+  <div class="wrap header-row">
+    <a class="logo" href="/" aria-label="{{ site.name }} home"><span class="logo-mark">N<sup>th</sup></span><span class="logo-text">Properties</span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span><span class="sr">Menu</span></button>
+    <nav id="nav" class="nav">
+      {% for item in [["Listings","/listings/"],["Services","/services/"],["Areas","/areas/"],["Team","/team/"],["Blog","/blog/"],["Contact","/contact/"]] %}
+      <a href="{{ item[1] }}"{% if page.url.startsWith(item[1]) %} aria-current="page"{% endif %}>{{ item[0] }}</a>
+      {% endfor %}
+      <a class="btn btn-sm" href="/contact/?topic=consultation">Free Consultation</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+{{ content | safe }}
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <a class="logo logo-light" href="/"><span class="logo-mark">N<sup>th</sup></span><span class="logo-text">Properties</span></a>
+      <p class="muted-light">{{ site.tagline }}</p>
+      <p><a href="tel:{{ site.phone | replace(r/[^0-9+]/g, '') }}">{{ site.phone }}</a>{% if site.email %}<br><a href="mailto:{{ site.email }}">{{ site.email }}</a>{% endif %}</p>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <a href="/listings/">Listings</a><a href="/services/">Services</a><a href="/areas/">Areas</a><a href="/team/">Team</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a>
+    </div>
+    <div>
+      <h4>Areas</h4>
+      {% for a in areas %}<a href="/areas/{{ a.slug }}/">{{ a.name }}</a>{% endfor %}
+    </div>
+    <div class="legal">
+      <p><strong>{{ site.brokerage or "[BROKERAGE NAME]" }}</strong>{% if site.brokerageAddress %}<br>{{ site.brokerageAddress }}{% endif %}</p>
+      <p class="eho"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 2 1 10h3v11h16V10h3L12 2zm-5 9h10v2H7v-2zm0 4h10v2H7v-2z"/></svg> Equal Housing Opportunity</p>
+      <p class="fine">Information deemed reliable but not guaranteed. Listing details subject to change. &copy; {{ site.year }} {{ site.name }}.</p>
+    </div>
+  </div>
+</footer>
+<script src="/assets/js/main.js" defer></script>
+</body>
+</html>

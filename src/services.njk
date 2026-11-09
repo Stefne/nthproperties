@@ -1,0 +1,13 @@
+---
+layout: base.njk
+title: Services
+permalink: /services/
+summary: Buying, selling, investing, property management, land and development across Greater Seattle.
+---
+<section class="page-head"><div class="wrap"><p class="eyebrow">What we do</p><h1>Services</h1><p class="lede">One team for the whole life of a property: buying it, improving it, renting it, and selling it.</p></div></section>
+<section class="section tight"><div class="wrap">
+  {% for s in services %}
+  <div class="service-row"><span class="tile-num">0{{ loop.index }}</span><h2 class="h3">{{ s.title }}</h2><p>{{ s.text }}</p><a class="link-arrow" href="/contact/?topic={{ s.title | urlencode }}">Talk to us</a></div>
+  {% endfor %}
+</div></section>
+{% include "cta.njk" %}

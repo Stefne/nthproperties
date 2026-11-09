@@ -1,0 +1,13 @@
+{% set d = item.data %}
+<article class="card" data-status="{{ d.status }}" data-city="{{ d.city }}" data-beds="{{ d.beds or 0 }}" data-price="{{ d.price or 0 }}">
+  <a href="{{ item.url }}" class="card-img">
+    <img src="{{ d.photos[0] if d.photos else '/assets/img/placeholder.svg' }}" alt="{{ d.title }}" loading="lazy" width="800" height="560">
+    <span class="badge badge-{{ d.status | slug2 }}">{{ d.status }}</span>
+  </a>
+  <div class="card-body">
+    <p class="price">{{ d.price | money }}</p>
+    <h3><a href="{{ item.url }}">{{ d.title }}</a></h3>
+    <p class="muted">{{ d.city }}, {{ d.state or "WA" }}</p>
+    <p class="facts">{% if d.beds %}<span>{{ d.beds }} bd</span>{% endif %}{% if d.baths %}<span>{{ d.baths }} ba</span>{% endif %}{% if d.sqft %}<span>{{ d.sqft | num }} sq ft</span>{% endif %}</p>
+  </div>
+</article>

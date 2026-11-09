@@ -1,0 +1,24 @@
+---
+layout: base.njk
+title: Listings
+permalink: /listings/
+summary: Homes and properties represented by Nth Properties across Greater Seattle and the South Sound.
+---
+<section class="page-head"><div class="wrap"><p class="eyebrow">Properties</p><h1>Listings</h1><p class="lede">Homes, investment properties, and land represented by the Nth Properties team.</p></div></section>
+<section class="section tight">
+  <div class="wrap">
+    {% if collections.listings.length %}
+    <form class="filters" data-filters onsubmit="return false">
+      <label>Status<select name="status"><option value="">All</option><option>Active</option><option>Coming Soon</option><option>Pending</option><option>Sold</option></select></label>
+      <label>City<select name="city"><option value="">All</option>{% for a in areas %}<option>{{ a.name }}</option>{% endfor %}</select></label>
+      <label>Min beds<select name="beds"><option value="0">Any</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></label>
+      <label>Max price<select name="price"><option value="0">Any</option><option value="500000">$500K</option><option value="750000">$750K</option><option value="1000000">$1M</option><option value="1500000">$1.5M</option><option value="2500000">$2.5M</option></select></label>
+    </form>
+    <div class="grid cards" data-results>{% for item in collections.listings %}{% include "card.njk" %}{% endfor %}</div>
+    <p class="empty" data-empty hidden>No listings match those filters.</p>
+    {% else %}
+    <div class="empty-state"><h2>New listings coming soon</h2><p>Tell us what you're looking for and we'll send matches before they hit the market.</p><a class="btn" href="/contact/?topic=Buying">Start a search</a></div>
+    {% endif %}
+  </div>
+</section>
+{% include "cta.njk" %}
