@@ -1,11 +1,11 @@
 ---
 layout: base.njk
-title: Blog
+title: Insights
 permalink: /blog/
 ---
-<section class="page-head"><div class="wrap"><p class="eyebrow">Market insight</p><h1>Blog</h1><p class="lede">Puget Sound market notes, buyer and seller guides, and investing.</p></div></section>
+<section class="page-head"><div class="wrap"><p class="eyebrow">The journal</p><h1>Insights</h1><p class="lede">Puget Sound market notes, buyer and seller guides, and investing.</p></div></section>
 <section class="section tight"><div class="wrap">
   {% if collections.posts.length %}
-  <div class="grid three">{% for p in collections.posts %}<a class="post-tile" href="{{ p.url }}"><span class="muted">{{ p.date | longDate }}</span><h3>{{ p.data.title }}</h3><p>{{ p.data.summary }}</p></a>{% endfor %}</div>
+  <div class="grid three">{% for p in collections.posts %}<a class="post-tile" href="{{ p.url }}"><span class="label">{{ p.date | longDate }}</span><h3>{{ p.data.title }}</h3><p>{{ p.data.summary }}</p></a>{% endfor %}</div>
   {% else %}<div class="empty-state"><h2>First posts coming soon</h2></div>{% endif %}
 </div></section>

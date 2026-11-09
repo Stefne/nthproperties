@@ -12,7 +12,29 @@ Open `src/_data/site.js` and fill in:
 | `email` | Public contact email | Shown in footer and contact page |
 | `web3formsKey` | Free key from web3forms.com (enter the email that should receive leads) | Makes the contact and listing forms deliver to your inbox |
 
-The build prints a warning until these are filled in. Also replace the bios in `src/_data/team.json` and add headshots (`photo: "/assets/img/team/stefne.jpg"`).
+Also in `site.js`: `cfAnalyticsToken` (free Cloudflare Web Analytics), `social` links, and the `stats` proof band (set `showStats: true` once real numbers are in).
+
+The build prints a warning until the required fields are filled in. Replace the bios in `src/_data/team.json`.
+
+## Photo slots
+
+Upload a JPG to any of these paths and it appears automatically. Until then a styled navy panel shows. Any size works; the build resizes and converts to WebP.
+
+| Path | Where it shows | Suggested subject |
+|---|---|---|
+| `src/assets/img/site/hero.jpg` | Home page hero, full screen | Twilight exterior or skyline, landscape, 2400px+ wide |
+| `src/assets/img/site/intro.jpg` | Home "Local knowledge" section (portrait crop) | Interior or the two of you |
+| `src/assets/img/site/home-value.jpg` | Home seller section + /home-value/ hero | Classic NW home exterior |
+| `src/assets/img/site/market-report.jpg` | Market report band | Aerial / water / skyline |
+| `src/assets/img/site/cta.jpg` | "Considering a move" band on every page | Mount Rainier or Sound at dusk |
+| `src/assets/img/site/areas/seattle.jpg` (bellevue, kent, tacoma) | Area tiles and area page heroes | Recognizable local scene |
+| `src/assets/img/team/stefne.jpg`, `zach.jpg` | Team page + agent card on listings | Headshot, portrait 4:5 |
+
+Free commercial-use stock: unsplash.com (credit optional). Your own professional photos convert better.
+
+## Lead forms
+
+Every form sends to the Web3Forms email with a subject that tells you the lead type: `SELLER LEAD: Home valuation request`, `BUYER LEAD: Search request`, `Showing request: <address>`, `New website inquiry`, `Market report signup`. Set an email filter on those subjects to route or prioritize them.
 
 ## Adding a listing (no coding)
 
@@ -20,6 +42,8 @@ The build prints a warning until these are filled in. Also replace the bios in `
 2. Create a new file in `src/listings/` named like `123-main-st-bellevue.md`, paste, fill in the fields.
 3. Upload photos to `src/assets/img/listings/123-main-st-bellevue/` and list them under `photos:` (first one is the cover). Resize to about 2000px wide, JPG, under 500 KB each.
 4. Commit. Cloudflare rebuilds and the listing is live in about a minute at `/listings/123-main-st-bellevue/`.
+
+Listing fields added in v1.1: `agent:` (name from team.json, shown as the listing agent with direct phone) and `openHouses:` (dates in the past hide automatically, and the next one shows as a badge on the card).
 
 To change status, edit `status:` (Active, Coming Soon, Pending, Sold). `featured: true` puts it on the home page. `draft: true` hides it from the live site.
 

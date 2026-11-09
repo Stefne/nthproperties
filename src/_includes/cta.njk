@@ -1,8 +1,10 @@
+{% from "macros.njk" import media %}
 <section class="cta-band">
-  <div class="wrap narrow center">
+  {{ media(site.photos.cta, "", "cta-bg") }}
+  <div class="wrap narrow center cta-inner">
     <p class="eyebrow light">Considering a move?</p>
     <h2>Let's talk strategy before you make a decision.</h2>
     <p>Buying, selling, investing, or managing a rental, start with a no-pressure conversation and a clear plan.</p>
-    <a class="btn btn-light" href="/contact/?topic=consultation">Book a Free Consultation</a>
+    <div class="btn-row center"><a class="btn btn-light" href="/contact/?topic=consultation">Book a Consultation</a><a class="btn btn-ghost" href="/home-value/">What's My Home Worth?</a></div>
   </div>
 </section>

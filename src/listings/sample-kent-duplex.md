@@ -12,6 +12,7 @@ city: Kent
 state: WA
 zip: "98030"
 listed: 2026-10-15
+agent: Zachary Niehaus
 summary: Sample listing for layout preview only. Not a real property.
 photos:
   - /assets/img/placeholder.svg

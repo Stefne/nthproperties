@@ -1,44 +1,72 @@
 ---
 layout: base.njk
+bodyClass: listing-page
 ---
 {% set mapq = (title + ", " + city + ", " + (state or "WA") + " " + (zip or "")) | urlencode %}
+{% set agentData = team | byName(agent) if agent else team[0] %}
+{% set oh = openHouses | upcoming %}
+{% set shareUrl = site.url + page.url %}
 <section class="listing-hero">
   <div class="gallery" data-gallery>
-    <img class="gallery-main" src="{{ photos[0] if photos else '/assets/img/placeholder.svg' }}" alt="{{ title }}" width="1600" height="1000">
+    <div class="gallery-stage">{% for p in (photos if photos else ['/assets/img/placeholder.svg']) %}<img class="gallery-main{% if loop.first %} on{% endif %}" src="{{ p }}" alt="{{ title }}, photo {{ loop.index }}" sizes="100vw"{% if loop.first %} loading="eager" fetchpriority="high"{% endif %}>{% endfor %}</div>
     {% if photos and photos.length > 1 %}
-    <div class="thumbs">{% for p in photos %}<button type="button" data-src="{{ p }}"{% if loop.first %} class="on"{% endif %}><img src="{{ p }}" alt="Photo {{ loop.index }}" loading="lazy" width="160" height="100"></button>{% endfor %}</div>
+    <div class="thumbs">{% for p in photos %}<button type="button" data-index="{{ loop.index0 }}"{% if loop.first %} class="on"{% endif %} aria-label="Photo {{ loop.index }}"><img src="{{ p }}" alt="" sizes="160px"></button>{% endfor %}</div>
     {% endif %}
   </div>
 </section>
-<section class="section">
+<section class="section tight">
   <div class="wrap listing-grid">
     <div>
-      <span class="badge badge-{{ status | slug2 }}">{{ status }}</span>
+      <div class="listing-tags"><span class="badge badge-{{ status | slug2 }}">{{ status }}</span>{% if type %}<span class="tag">{{ type }}</span>{% endif %}</div>
       <h1 class="listing-title">{{ title }}</h1>
-      <p class="muted">{% if neighborhood %}{{ neighborhood }} · {% endif %}{{ city }}, {{ state or "WA" }} {{ zip }}</p>
+      <p class="card-loc">{% if neighborhood %}{{ neighborhood }} · {% endif %}{{ city }}, {{ state or "WA" }} {{ zip }}</p>
       <p class="price big">{{ price | money }}</p>
       <dl class="specs">
         {% if beds %}<div><dt>Beds</dt><dd>{{ beds }}</dd></div>{% endif %}
         {% if baths %}<div><dt>Baths</dt><dd>{{ baths }}</dd></div>{% endif %}
         {% if sqft %}<div><dt>Sq Ft</dt><dd>{{ sqft | num }}</dd></div>{% endif %}
         {% if lot %}<div><dt>Lot</dt><dd>{{ lot }}</dd></div>{% endif %}
-        {% if type %}<div><dt>Type</dt><dd>{{ type }}</dd></div>{% endif %}
         {% if yearBuilt %}<div><dt>Built</dt><dd>{{ yearBuilt }}</dd></div>{% endif %}
       </dl>
+      {% if oh.length %}
+      <div class="open-houses"><h2 class="label">Open Houses</h2>{% for o in oh %}<p><strong>{{ o.date | shortDate }}</strong> · {{ o.time }}</p>{% endfor %}</div>
+      {% endif %}
       <div class="prose">{{ content | safe }}</div>
       {% if features %}<h2 class="h3">Features</h2><ul class="features">{% for f in features %}<li>{{ f }}</li>{% endfor %}</ul>{% endif %}
       {% if tour %}<h2 class="h3">Virtual Tour</h2><div class="embed"><iframe src="{{ tour }}" title="Virtual tour" loading="lazy" allowfullscreen></iframe></div>{% endif %}
       <h2 class="h3">Location</h2>
-      <div class="embed"><iframe src="https://www.google.com/maps?q={{ mapq }}&output=embed" title="Map" loading="lazy"></iframe></div>
+      <div class="embed"><iframe src="https://www.google.com/maps?q={{ mapq }}&output=embed" title="Map of {{ title }}" loading="lazy"></iframe></div>
+      <div class="share"><span class="label">Share</span>
+        <a href="sms:?&body={{ (title + ' ' + shareUrl) | urlencode }}">Text</a>
+        <a href="mailto:?subject={{ title | urlencode }}&body={{ shareUrl | urlencode }}">Email</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ shareUrl | urlencode }}" target="_blank" rel="noopener">Facebook</a>
+        <button type="button" data-copy="{{ shareUrl }}">Copy link</button>
+      </div>
       {% if mls %}<p class="fine">MLS# {{ mls }}</p>{% endif %}
     </div>
-    <aside class="inquiry">
-      <h2 class="h3">Interested in this home?</h2>
-      <p class="muted">Ask a question or schedule a private showing.</p>
-      {% set inquiryTopic = "Listing: " + title + ", " + city %}
+    <aside class="inquiry" id="inquire">
+      {% if agentData %}
+      <div class="agent-card">
+        {% set ap = agentData.photo | photo %}
+        <div class="agent-photo">{% if ap %}<img src="{{ ap }}" alt="{{ agentData.name }}" sizes="72px">{% else %}<span>{{ agentData.name | initials }}</span>{% endif %}</div>
+        <div><p class="label">Listing Agent</p><p class="agent-name">{{ agentData.name }}</p><a href="tel:{{ (agentData.phone or site.phone) | tel }}">{{ agentData.phone or site.phone }}</a></div>
+      </div>
+      {% endif %}
+      <h2 class="h3">{% if status == "Sold" %}Thinking of selling nearby?{% else %}Schedule a private showing{% endif %}</h2>
+      {% if status == "Sold" %}
+        {% set formType = "valuation" %}
+      {% else %}
+        {% set formType = "showing" %}
+      {% endif %}
+      {% set inquiryTopic = title + ", " + city %}
       {% include "form.njk" %}
-      <p class="center"><a href="tel:{{ site.phone | replace(r/[^0-9+]/g, '') }}">or call {{ site.phone }}</a></p>
     </aside>
   </div>
 </section>
 {% include "cta.njk" %}
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"RealEstateListing","name":{{ title | dump | safe }},"url":"{{ shareUrl }}","datePosted":"{{ listed }}","image":[{% for p in photos %}"{{ site.url }}{{ p }}"{% if not loop.last %},{% endif %}{% endfor %}],"offers":{"@type":"Offer","price":{{ price or 0 }},"priceCurrency":"USD"},"about":{"@type":"SingleFamilyResidence","numberOfRooms":{{ beds or 0 }},"floorSize":{"@type":"QuantitativeValue","value":{{ sqft or 0 }},"unitCode":"FTK"},"address":{"@type":"PostalAddress","streetAddress":{{ title | dump | safe }},"addressLocality":"{{ city }}","addressRegion":"{{ state or 'WA' }}","postalCode":"{{ zip }}"}}}</script>
+<div class="mobile-bar">
+  <a href="tel:{{ (agentData.phone or site.phone) | tel }}">Call</a>
+  <a href="sms:{{ (agentData.phone or site.phone) | tel }}">Text</a>
+  <a class="on" href="#inquire">{% if status == "Sold" %}Home Value{% else %}Request Showing{% endif %}</a>
+</div>

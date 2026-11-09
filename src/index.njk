@@ -1,69 +1,100 @@
 ---
 layout: base.njk
-transparentHeader: true
+overHero: true
 bodyClass: home
 ---
-<section class="hero"{% if site.heroImage %} style="--hero:url('{{ site.heroImage }}')"{% endif %}>
+{% from "macros.njk" import media %}
+<section class="hero">
+  {{ media(site.photos.hero, "Puget Sound home at dusk", "hero-bg", true) }}
   <div class="wrap hero-inner">
     <p class="eyebrow light">Greater Seattle · Eastside · South Sound</p>
     <h1>Real estate, guided by people who build, invest, and live here.</h1>
-    <p class="lede">Buying, selling, investing, or managing property, Nth Properties brings local knowledge and a long-term plan to every move.</p>
-    <div class="hero-ctas"><a class="btn btn-light" href="/listings/">View Listings</a><a class="btn btn-ghost" href="/contact/?topic=consultation">Free Consultation</a></div>
+    <p class="hero-sub">Local knowledge <span>|</span> Long-term thinking</p>
+    <div class="btn-row"><a class="btn btn-light" href="/listings/">Explore Properties</a><a class="btn btn-ghost" href="/home-value/">What's My Home Worth?</a></div>
   </div>
+  <a class="scroll-cue" href="#intro" aria-label="Scroll down"></a>
 </section>
 
-<section class="section">
-  <div class="wrap split">
+<section class="section" id="intro">
+  <div class="wrap split split-media">
+    {{ media(site.photos.intro, "Bright Pacific Northwest living room", "tall", false, "(min-width: 820px) 45vw, 100vw") }}
     <div>
       <p class="eyebrow">A boutique real estate team</p>
-      <h2>Local knowledge. Broader perspective.</h2>
-    </div>
-    <div>
+      <h2>Local knowledge.<br><em>Broader perspective.</em></h2>
       <p>Most of our business comes from referrals, which means every client gets the kind of care that earns one. We have helped clients buy a first home, grow into a first investment, and keep building from there.</p>
       <p>Our experience spans single-family, multi-family, land, construction, and short- and long-term rentals, so the advice you get accounts for what a property can become, not just what it is today.</p>
-      <a class="link-arrow" href="/team/">Meet the team</a>
+      <a class="link-line" href="/team/">Meet the team</a>
     </div>
   </div>
 </section>
 
-{% set feat = collections.listings | featured %}
-{% if feat.length %}
-<section class="section alt">
-  <div class="wrap">
-    <div class="section-head"><div><p class="eyebrow">Featured Properties</p><h2>Our listings. Your opportunity.</h2></div><a class="link-arrow" href="/listings/">All listings</a></div>
-    <div class="grid cards">{% for item in feat | head(6) %}{% include "card.njk" %}{% endfor %}</div>
-  </div>
+{% if site.showStats %}
+<section class="stats">
+  <div class="wrap stats-row">{% for s in site.stats %}{% if s.value %}<div><strong>{{ s.value }}</strong><span>{{ s.label }}</span></div>{% endif %}{% endfor %}</div>
 </section>
 {% endif %}
 
-<section class="section">
+{% set feat = collections.listings | featured %}
+<section class="section ivory">
   <div class="wrap">
-    <div class="section-head"><div><p class="eyebrow">What we do</p><h2>Full-service real estate</h2></div><a class="link-arrow" href="/services/">All services</a></div>
-    <div class="grid three">{% for s in services %}<div class="tile"><span class="tile-num">0{{ loop.index }}</span><h3>{{ s.title }}</h3><p>{{ s.text }}</p></div>{% endfor %}</div>
+    <div class="section-head"><div><p class="eyebrow">Featured Properties</p><h2>Our listings. <em>Your opportunity.</em></h2></div><a class="link-line" href="/listings/">View all listings</a></div>
+    {% if feat.length %}
+    <div class="grid cards">{% for item in feat | head(6) %}{% include "card.njk" %}{% endfor %}</div>
+    {% else %}
+    <div class="empty-state"><h3>New listings are on the way.</h3><p>Tell us what you're looking for and we'll send matches, including homes before they hit the market.</p><a class="btn" href="/buy/">Start a Search</a></div>
+    {% endif %}
   </div>
 </section>
 
-<section class="section dark">
+<section class="section split-band">
+  <div class="wrap split split-media reverse">
+    {{ media(site.photos.valuation, "Craftsman home exterior", "tall", false, "(min-width: 820px) 45vw, 100vw") }}
+    <div>
+      <p class="eyebrow">For sellers</p>
+      <h2>What is your home <em>really</em> worth?</h2>
+      <p>Online estimates miss what matters: the remodel, the view, the block. Get a pricing analysis built from actual comparable sales and a walkthrough by someone who has built and remodeled homes.</p>
+      <ul class="checks"><li>Comparable-sales analysis, not an algorithm</li><li>Prep and upgrade advice ranked by return</li><li>No obligation, no pressure</li></ul>
+      <a class="btn" href="/home-value/">Request a Home Valuation</a>
+    </div>
+  </div>
+</section>
+
+<section class="section navy">
   <div class="wrap">
-    <div class="section-head"><div><p class="eyebrow light">Where we work</p><h2>Explore the Puget Sound</h2></div></div>
-    <div class="grid four">{% for a in areas %}<a class="area-tile" href="/areas/{{ a.slug }}/"><span class="muted-light">{{ a.county }}</span><strong>{{ a.name }}</strong><span class="link-arrow">Explore</span></a>{% endfor %}</div>
+    <div class="section-head"><div><p class="eyebrow light">What we do</p><h2>Full-service real estate</h2></div><a class="link-line light" href="/services/">All services</a></div>
+    <div class="grid three services">{% for s in services %}<div class="svc"><span class="svc-num">0{{ loop.index }}</span><h3>{{ s.title }}</h3><p>{{ s.text }}</p></div>{% endfor %}</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head center-head"><div><p class="eyebrow">Where we work</p><h2>Explore the Puget Sound</h2></div></div>
+    <div class="grid four">{% for a in areas %}<a class="area-tile" href="/areas/{{ a.slug }}/">{{ media(a.photo, a.name, "area-bg", false, "(min-width: 1000px) 25vw, 50vw") }}<span class="area-text"><span class="label">{{ a.county }}</span><strong>{{ a.name }}</strong></span></a>{% endfor %}</div>
   </div>
 </section>
 
 {% if site.showTestimonials %}
-<section class="section">
-  <div class="wrap">
-    <p class="eyebrow center">Trusted by our clients</p>
-    <div class="grid three">{% for t in testimonials %}<blockquote class="quote"><p>“{{ t.quote }}”</p><footer><strong>{{ t.name }}</strong><span class="muted">{{ t.detail }}</span></footer></blockquote>{% endfor %}</div>
+<section class="section ivory">
+  <div class="wrap narrow center">
+    <p class="eyebrow">Trusted by our clients</p>
+    <div class="quotes" data-quotes>{% for t in testimonials %}<blockquote class="quote{% if loop.first %} on{% endif %}"><p>“{{ t.quote }}”</p><footer><span class="label">{{ t.name }} · {{ t.detail }}</span></footer></blockquote>{% endfor %}</div>
   </div>
 </section>
 {% endif %}
 
+<section class="report">
+  {{ media(site.photos.report, "", "report-bg") }}
+  <div class="wrap report-inner">
+    <div><p class="eyebrow light">Puget Sound Intelligence</p><h2>The market, read by people who work it every day.</h2><p>A short quarterly report on prices, inventory, and where we see opportunity. Straight to your inbox.</p></div>
+    <div>{% set formType = "newsletter" %}{% include "form.njk" %}</div>
+  </div>
+</section>
+
 {% if collections.posts.length %}
-<section class="section alt">
+<section class="section">
   <div class="wrap">
-    <div class="section-head"><div><p class="eyebrow">Market Insight</p><h2>From the blog</h2></div><a class="link-arrow" href="/blog/">All posts</a></div>
-    <div class="grid three">{% for p in collections.posts | head(3) %}<a class="post-tile" href="{{ p.url }}"><span class="muted">{{ p.date | longDate }}</span><h3>{{ p.data.title }}</h3><p>{{ p.data.summary }}</p></a>{% endfor %}</div>
+    <div class="section-head"><div><p class="eyebrow">Insights</p><h2>From the journal</h2></div><a class="link-line" href="/blog/">All articles</a></div>
+    <div class="grid three">{% for p in collections.posts | head(3) %}<a class="post-tile" href="{{ p.url }}"><span class="label">{{ p.date | longDate }}</span><h3>{{ p.data.title }}</h3><p>{{ p.data.summary }}</p><span class="link-line">Read</span></a>{% endfor %}</div>
   </div>
 </section>
 {% endif %}

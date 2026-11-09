@@ -3,16 +3,16 @@ layout: base.njk
 title: Our Team
 permalink: /team/
 ---
-<section class="page-head"><div class="wrap"><p class="eyebrow">Who we are</p><h1>Our Team</h1><p class="lede">A boutique team built on referrals and long-term relationships.</p></div></section>
+<section class="page-head"><div class="wrap"><p class="eyebrow">Who we are</p><h1>A boutique team, <em>by design.</em></h1><p class="lede">You work directly with the partners, from the first conversation through closing and beyond.</p></div></section>
 <section class="section tight"><div class="wrap">
-  {% for m in team %}
+  {% for m in team %}{% set mp = m.photo | photo %}
   <div class="member">
-    <div class="member-photo">{% if m.photo %}<img src="{{ m.photo }}" alt="{{ m.name }}" width="600" height="750">{% else %}<span>{{ m.name | initials }}</span>{% endif %}</div>
+    <div class="member-photo">{% if mp %}<img src="{{ mp }}" alt="{{ m.name }}" sizes="(min-width: 720px) 40vw, 100vw">{% else %}<span>{{ m.name | initials }}</span>{% endif %}</div>
     <div>
       <p class="eyebrow">{{ m.role }}</p>
       <h2>{{ m.name }}</h2>
       <p>{{ m.bio }}</p>
-      <p class="muted">{% if m.phone %}<a href="tel:{{ m.phone }}">{{ m.phone }}</a> · {% endif %}{% if m.email %}<a href="mailto:{{ m.email }}">{{ m.email }}</a>{% endif %}{% if m.license %}<br>WA License #{{ m.license }}{% endif %}</p>
+      <p class="member-contact">{% if m.phone %}<a href="tel:{{ m.phone | tel }}">{{ m.phone }}</a>{% endif %}{% if m.email %}<a href="mailto:{{ m.email }}">{{ m.email }}</a>{% endif %}{% if m.license %}<span>WA License #{{ m.license }}</span>{% endif %}</p>
     </div>
   </div>
   {% endfor %}

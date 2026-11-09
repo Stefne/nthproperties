@@ -1,0 +1,31 @@
+---
+layout: base.njk
+title: What's My Home Worth?
+permalink: /home-value/
+overHero: true
+summary: Get a free, no-obligation home valuation from Nth Properties, built from real comparable sales, not an algorithm.
+---
+{% from "macros.njk" import media %}
+<section class="page-hero">
+  {{ media(site.photos.valuation, "", "page-hero-bg", true) }}
+  <div class="wrap page-hero-inner"><p class="eyebrow light">For sellers</p><h1>What is your home <em>really</em> worth?</h1></div>
+</section>
+<section class="section tight">
+  <div class="wrap split">
+    <div>
+      <h2 class="h3">A valuation built by people, not an algorithm</h2>
+      <p>Automated estimates can't see your remodel, your view, or how your block compares to the one next door. We pull the comparable sales that matter, walk the home if you'd like, and give you a price range with the reasoning behind it.</p>
+      <ol class="steps">
+        <li><strong>Tell us about the home.</strong> Address and anything that's been updated.</li>
+        <li><strong>We run the comps.</strong> Recent sales, active competition, and absorption in your micro-market.</li>
+        <li><strong>You get a range and a plan.</strong> Including the prep and upgrades worth doing, ranked by return.</li>
+      </ol>
+      <p class="fine">No obligation. We won't add you to a drip campaign.</p>
+    </div>
+    <div class="inquiry">{% set formType = "valuation" %}{% include "form.njk" %}</div>
+  </div>
+</section>
+{% set sold = collections.listings | selectattr("data.status", "equalto", "Sold") %}
+{% if sold.length %}
+<section class="section ivory"><div class="wrap"><div class="section-head"><div><p class="eyebrow">Recently sold</p><h2>Results for our sellers</h2></div></div><div class="grid cards">{% for item in sold | head(3) %}{% include "card.njk" %}{% endfor %}</div></div></section>
+{% endif %}

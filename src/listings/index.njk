@@ -4,21 +4,25 @@ title: Listings
 permalink: /listings/
 summary: Homes and properties represented by Nth Properties across Greater Seattle and the South Sound.
 ---
-<section class="page-head"><div class="wrap"><p class="eyebrow">Properties</p><h1>Listings</h1><p class="lede">Homes, investment properties, and land represented by the Nth Properties team.</p></div></section>
+<section class="page-head"><div class="wrap"><p class="eyebrow">Properties</p><h1>Our listings. <em>Your opportunity.</em></h1></div></section>
 <section class="section tight">
   <div class="wrap">
     {% if collections.listings.length %}
+    <div class="tabs" role="tablist" data-tabs>
+      <button role="tab" data-status="" aria-selected="true">All</button><button role="tab" data-status="Active">Active</button><button role="tab" data-status="Coming Soon">Coming Soon</button><button role="tab" data-status="Pending">Pending</button><button role="tab" data-status="Sold">Sold</button>
+    </div>
     <form class="filters" data-filters onsubmit="return false">
-      <label>Status<select name="status"><option value="">All</option><option>Active</option><option>Coming Soon</option><option>Pending</option><option>Sold</option></select></label>
+      <input type="hidden" name="status" value="">
       <label>City<select name="city"><option value="">All</option>{% for a in areas %}<option>{{ a.name }}</option>{% endfor %}</select></label>
       <label>Min beds<select name="beds"><option value="0">Any</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></label>
-      <label>Max price<select name="price"><option value="0">Any</option><option value="500000">$500K</option><option value="750000">$750K</option><option value="1000000">$1M</option><option value="1500000">$1.5M</option><option value="2500000">$2.5M</option></select></label>
+      <label>Max price<select name="price"><option value="0">Any</option><option value="600000">$600K</option><option value="900000">$900K</option><option value="1300000">$1.3M</option><option value="2000000">$2M</option><option value="3000000">$3M</option></select></label>
     </form>
     <div class="grid cards" data-results>{% for item in collections.listings %}{% include "card.njk" %}{% endfor %}</div>
-    <p class="empty" data-empty hidden>No listings match those filters.</p>
-    {% else %}
-    <div class="empty-state"><h2>New listings coming soon</h2><p>Tell us what you're looking for and we'll send matches before they hit the market.</p><a class="btn" href="/contact/?topic=Buying">Start a search</a></div>
+    <p class="empty" data-empty hidden>No listings match those filters. <a href="/buy/">Tell us what you want</a> and we'll find it.</p>
     {% endif %}
+    <div class="empty-state mt">
+      <h3>Not seeing the right home?</h3><p>Many of the best homes trade before they're widely marketed. Tell us what you want and we'll watch for it.</p><a class="btn" href="/buy/">Start a Custom Search</a>
+    </div>
   </div>
 </section>
 {% include "cta.njk" %}

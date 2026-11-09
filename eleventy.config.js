@@ -1,8 +1,19 @@
+import fs from "node:fs";
+import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
+
 const STATUS_RANK = { "Active": 0, "Coming Soon": 1, "Pending": 2, "Sold": 3 };
 const REQUIRED = ["brokerage", "email", "web3formsKey"];
 
 export default function (cfg) {
   cfg.addPassthroughCopy({ "src/assets": "assets", "src/_headers": "_headers", "src/robots.txt": "robots.txt" });
+
+  // Resizes every <img> to webp/jpeg at several widths, so 6 MB phone photos stay fast.
+  cfg.addPlugin(eleventyImageTransformPlugin, {
+    formats: ["webp", "jpeg"],
+    widths: [480, 960, 1600],
+    failOnError: false,
+    htmlOptions: { imgAttributes: { loading: "lazy", decoding: "async", sizes: "100vw" } },
+  });
 
   // Files with `draft: true` show in `npm start` previews but are left out of production builds.
   cfg.addPreprocessor("drafts", "*", (data) => {
@@ -19,11 +30,17 @@ export default function (cfg) {
   cfg.addFilter("money", (n) => (n ? "$" + Number(n).toLocaleString("en-US") : "Price on request"));
   cfg.addFilter("num", (n) => Number(n).toLocaleString("en-US"));
   cfg.addFilter("longDate", (d) => new Date(d).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" }));
-  cfg.addFilter("initials", (s) => String(s).split(/\s+/).map((w) => w[0]).join(""));
+  cfg.addFilter("shortDate", (d) => new Date(d).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", timeZone: "UTC" }));
+  cfg.addFilter("tel", (s) => "+1" + String(s).replace(/\D/g, "").replace(/^1/, ""));
   cfg.addFilter("head", (arr, n) => arr.slice(0, n));
+  cfg.addFilter("initials", (s) => String(s).split(/\s+/).map((w) => w[0]).join(""));
   cfg.addFilter("inCity", (items, city) => items.filter((i) => i.data.city === city));
   cfg.addFilter("featured", (items) => items.filter((i) => i.data.featured && i.data.status !== "Sold"));
+  cfg.addFilter("byName", (arr, name) => arr.find((m) => m.name === name));
   cfg.addFilter("slug2", (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""));
+  // Photo slots: returns the path if the file exists in src/, else "" so templates fall back to a styled panel.
+  cfg.addFilter("photo", (p) => (p && fs.existsSync("src" + p) ? p : ""));
+  cfg.addFilter("upcoming", (list) => (list || []).filter((o) => new Date(o.date) >= new Date(new Date().toDateString())));
 
   cfg.on("eleventy.before", async () => {
     const site = (await import("./src/_data/site.js?" + Date.now())).default;

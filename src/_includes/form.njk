@@ -1,20 +1,55 @@
-<form class="form" action="https://api.web3forms.com/submit" method="POST">
+{# Set formType before including: general (default), showing, valuation, buyer, newsletter. Optional inquiryTopic. #}
+{% set ft = formType or "general" %}
+{% set subjects = { general: "New website inquiry", showing: "Showing request", valuation: "SELLER LEAD: Home valuation request", buyer: "BUYER LEAD: Search request", newsletter: "Market report signup" } %}
+<form class="form form-{{ ft }}" action="https://api.web3forms.com/submit" method="POST">
   <input type="hidden" name="access_key" value="{{ site.web3formsKey }}">
-  <input type="hidden" name="subject" value="New website lead{% if inquiryTopic %}: {{ inquiryTopic }}{% endif %}">
+  <input type="hidden" name="subject" value="{{ subjects[ft] }}{% if inquiryTopic %}: {{ inquiryTopic }}{% endif %}">
   <input type="hidden" name="from_name" value="{{ site.name }} Website">
+  <input type="hidden" name="lead_type" value="{{ ft }}">
+  <input type="hidden" name="page" value="{{ site.url }}{{ page.url }}">
   <input type="hidden" name="redirect" value="{{ site.url }}/thanks/">
   <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
-  <label>Name<input name="name" required autocomplete="name"></label>
+  {% if ft == "newsletter" %}
+  <div class="inline-field"><label class="sr" for="nl-email">Email</label><input id="nl-email" type="email" name="email" placeholder="Email address" required autocomplete="email"><button class="btn btn-brass" type="submit">Join</button></div>
+  {% else %}
+  <div class="row2">
+    <label>Name<input name="name" required autocomplete="name"></label>
+    <label>Phone<input type="tel" name="phone" autocomplete="tel"{% if ft != "general" %} required{% endif %}></label>
+  </div>
   <label>Email<input type="email" name="email" required autocomplete="email"></label>
-  <label>Phone<input type="tel" name="phone" autocomplete="tel"></label>
-  {% if not inquiryTopic %}
+  {% if ft == "valuation" %}
+  <label>Property address<input name="property_address" required autocomplete="street-address"></label>
+  <div class="row2">
+    <label>Beds / baths<input name="beds_baths" placeholder="e.g. 4 bd / 2.5 ba"></label>
+    <label>Timeline<select name="timeline"><option>Just curious</option><option>0-3 months</option><option>3-6 months</option><option>6-12 months</option><option>12+ months</option></select></label>
+  </div>
+  <label>Recent updates or condition<textarea name="message" rows="3" placeholder="Kitchen remodel 2021, new roof, needs paint..."></textarea></label>
+  {% elif ft == "buyer" %}
+  <div class="row2">
+    <label>Price range<select name="budget"><option>Under $600K</option><option>$600K-$900K</option><option>$900K-$1.3M</option><option>$1.3M-$2M</option><option>$2M-$3M</option><option>$3M+</option></select></label>
+    <label>Min beds<select name="beds"><option>Any</option><option>1+</option><option>2+</option><option>3+</option><option>4+</option><option>5+</option></select></label>
+  </div>
+  <label>Areas of interest<input name="areas" placeholder="Bellevue, Kirkland, West Seattle..."></label>
+  <div class="row2">
+    <label>Timeline<select name="timeline"><option>0-3 months</option><option>3-6 months</option><option>6-12 months</option><option>Just looking</option></select></label>
+    <label>Pre-approved?<select name="preapproved"><option>Not yet</option><option>Yes</option><option>Paying cash</option></select></label>
+  </div>
+  <label>Must-haves<textarea name="message" rows="3" placeholder="Yard, ADU potential, school district, commute..."></textarea></label>
+  {% elif ft == "showing" %}
+  <div class="row2">
+    <label>Preferred date<input type="date" name="preferred_date"></label>
+    <label>Time<select name="preferred_time"><option>Morning</option><option>Afternoon</option><option>Evening</option><option>Flexible</option></select></label>
+  </div>
+  <label>Questions<textarea name="message" rows="3"></textarea></label>
+  {% else %}
   <label>I'm interested in
-    <select name="topic">
-      <option value="consultation">A free consultation</option><option>Buying</option><option>Selling</option><option>Investing</option><option>Property management</option><option>Land &amp; development</option><option>Something else</option>
-    </select>
+    <select name="topic"><option value="consultation">A free consultation</option><option>Buying</option><option>Selling</option><option>Investing</option><option>Property management</option><option>Land &amp; development</option><option>Something else</option></select>
   </label>
-  {% else %}<input type="hidden" name="topic" value="{{ inquiryTopic }}">{% endif %}
   <label>Message<textarea name="message" rows="4"></textarea></label>
-  <button class="btn" type="submit">Send</button>
+  {% endif %}
+  <button class="btn" type="submit">{{ {general:"Send Message", showing:"Request a Showing", valuation:"Get My Home Value", buyer:"Start My Search"}[ft] }}</button>
+  <p class="fine">{{ site.responsePromise }}</p>
+  {% endif %}
   {% if not site.web3formsKey %}<p class="fine warn">Form not live yet: add a Web3Forms key in site.js.</p>{% endif %}
 </form>
+{% set formType = "" %}{% set inquiryTopic = "" %}

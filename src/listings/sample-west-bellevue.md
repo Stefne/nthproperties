@@ -15,6 +15,9 @@ state: WA
 zip: "98004"
 neighborhood: West Bellevue
 listed: 2026-11-01
+agent: Stefne Wang
+openHouses:
+  - { date: 2026-12-13, time: "1-4 PM" }
 summary: Sample listing for layout preview only. Not a real property.
 photos:
   - /assets/img/placeholder.svg

@@ -2,15 +2,36 @@
 export default {
   name: "Nth Properties",
   tagline: "Local knowledge. Long-term thinking.",
-  description: "Nth Properties is a Greater Seattle real estate team helping clients buy, sell, invest, and manage property across King County and the South Sound.",
+  description: "Nth Properties is a boutique Greater Seattle real estate team helping clients buy, sell, invest, and manage property across King County and the South Sound.",
   url: "https://nthproperty.com",
   phone: "(206) 351-5268",
   email: "",            // TODO: lead/contact email shown on site
   brokerage: "",        // TODO: licensed firm name, required by WA advertising rules (WAC 308-124B-210)
   brokerageAddress: "", // TODO: firm office address
   web3formsKey: "",     // TODO: free key from https://web3forms.com (sends form leads to your email)
-  heroImage: "",        // e.g. "/assets/img/hero.jpg" once you have a photo; blank = brand gradient
+  cfAnalyticsToken: "", // Cloudflare dashboard > Web Analytics > Add site > copy the token from the snippet
+  responsePromise: "We reply within one business day.",
+
+  // Proof band on the home page. Only real, defensible numbers. Set showStats: true once filled.
+  showStats: false,
+  stats: [
+    { value: "", label: "Years in Puget Sound real estate" },
+    { value: "", label: "Homes sold" },
+    { value: "", label: "In sales volume" },
+    { value: "", label: "Average client rating" },
+  ],
+
   showTestimonials: false, // flip to true once src/_data/testimonials.json holds real client quotes
-  social: { instagram: "", facebook: "", linkedin: "" },
+
+  // Photo slots. Drop a JPG at each path and it appears automatically; until then a styled panel shows.
+  photos: {
+    hero: "/assets/img/site/hero.jpg",
+    intro: "/assets/img/site/intro.jpg",
+    valuation: "/assets/img/site/home-value.jpg",
+    report: "/assets/img/site/market-report.jpg",
+    cta: "/assets/img/site/cta.jpg",
+  },
+
+  social: { instagram: "", facebook: "", linkedin: "", google: "" }, // full URLs; blank ones are hidden
   year: new Date().getFullYear(),
 };

@@ -24,5 +24,8 @@ features:
   - Updated kitchen with quartz counters
   - Primary suite with walk-in closet
 tour: ""                       # optional Matterport or YouTube embed URL
+agent: Stefne Wang             # must match a name in src/_data/team.json
+openHouses:                    # optional; past dates hide automatically
+  - { date: 2026-11-15, time: "1-4 PM" }
 ---
 Write the property description here in plain paragraphs.

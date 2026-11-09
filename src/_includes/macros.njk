@@ -1,0 +1,7 @@
+{# Photo with automatic fallback panel. src may be blank or missing on disk. #}
+{% macro media(src, alt, cls="", eager=false, sizes="100vw") %}
+{% set real = src | photo %}
+<div class="media {{ cls }}{% if not real %} media-empty{% endif %}">
+  {% if real %}<img src="{{ real }}" alt="{{ alt }}" sizes="{{ sizes }}"{% if eager %} loading="eager" fetchpriority="high"{% endif %}>{% endif %}
+</div>
+{% endmacro %}
