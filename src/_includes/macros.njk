@@ -5,3 +5,16 @@
   {% if real %}<img src="{{ real }}" alt="{{ alt }}" sizes="{{ sizes }}"{% if eager %} loading="eager" fetchpriority="high"{% endif %}>{% endif %}
 </div>
 {% endmacro %}
+
+{# Line-drawn architectural icons #}
+{% macro icon(name) %}
+<svg class="icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+{% if name == "buy" %}<path d="M8 30 32 10l24 20"/><path d="M14 26v28h36V26"/><path d="M27 54V40h10v14"/><circle cx="44" cy="20" r="0"/><path d="M40 14v-4h6v9"/>
+{% elif name == "sell" %}<path d="M10 54V22l22-12 22 12v32"/><path d="M10 54h44"/><rect x="22" y="28" width="20" height="14"/><path d="M32 28v14M22 35h20"/>
+{% elif name == "invest" %}<path d="M8 54h48"/><rect x="12" y="38" width="8" height="16"/><rect x="28" y="28" width="8" height="26"/><rect x="44" y="16" width="8" height="38"/><path d="M12 30 26 18l8 6 16-14"/><path d="M44 10h6v6"/>
+{% elif name == "build" %}<path d="M8 54h48"/><path d="M14 54V30h20v24"/><path d="M14 30 24 22l10 8"/><path d="M40 54V14"/><path d="M40 14h16"/><path d="M52 14v8"/><path d="M40 22l8-8"/><rect x="20" y="40" width="8" height="14"/>
+{% endif %}
+</svg>
+{% endmacro %}
+
+{% macro arrow() %}<svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>{% endmacro %}

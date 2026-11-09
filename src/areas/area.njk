@@ -2,7 +2,6 @@
 layout: base.njk
 pagination: { data: areas, size: 1, alias: area }
 permalink: "/areas/{{ area.slug }}/"
-overHero: true
 eleventyComputed:
   title: "{{ area.name }} Real Estate"
   summary: "{{ area.blurb }}"
@@ -10,7 +9,7 @@ eleventyComputed:
 {% from "macros.njk" import media %}
 <section class="page-hero">
   {{ media(area.photo, area.name, "page-hero-bg", true) }}
-  <div class="wrap page-hero-inner"><p class="eyebrow light">{{ area.county }}</p><h1>{{ area.name }}</h1></div>
+  <div class="wrap page-hero-inner"><p class="kicker light">{{ area.county }}</p><h1 class="h-hero">{{ area.name }}</h1></div>
 </section>
 <section class="section tight"><div class="wrap split">
   <div><p class="lede dark">{{ area.blurb }}</p></div>

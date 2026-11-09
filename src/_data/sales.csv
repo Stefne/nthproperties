@@ -1,0 +1,11 @@
+# SALES HISTORY. One row per closed sale. Paste from a spreadsheet (File > Download > CSV).
+# Columns: address, city, price, date (YYYY-MM-DD), side (Seller / Buyer / Both), type, beds, baths, sqft, lat, lng, photo, draft
+# lat/lng put the sale on the map: right-click the address in Google Maps to copy them. photo is optional (/assets/img/sold/xxx.jpg).
+# Rows with draft = yes only show in local previews. Delete the sample rows once real sales are in.
+address,city,price,date,side,type,beds,baths,sqft,lat,lng,photo,draft
+Sample Sale 1,Bellevue,1650000,2026-09-12,Seller,Single Family,4,3,2900,47.6101,-122.2015,,yes
+Sample Sale 2,Seattle,925000,2026-07-30,Buyer,Townhome,3,2.5,1700,47.6686,-122.3860,,yes
+Sample Sale 3,Kent,710000,2026-06-02,Both,Single Family,4,2.5,2300,47.3809,-122.2348,,yes
+Sample Sale 4,Tacoma,640000,2026-04-18,Seller,Single Family,3,2,1850,47.2700,-122.4750,,yes
+Sample Sale 5,Seattle,1190000,2025-11-08,Buyer,Single Family,4,2,2400,47.5615,-122.3870,,yes
+Sample Sale 6,Kirkland,2100000,2025-09-21,Seller,Single Family,5,4,3600,47.6769,-122.2060,,yes

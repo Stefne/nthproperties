@@ -3,14 +3,14 @@ layout: base.njk
 title: Contact
 permalink: /contact/
 ---
-<section class="page-head"><div class="wrap"><p class="eyebrow">Get in touch</p><h1>Let's <em>talk.</em></h1><p class="lede">Tell us a little about what you're planning. {{ site.responsePromise }}</p></div></section>
+<section class="page-head"><div class="wrap"><p class="kicker">Get in touch</p><h1 class="h-hero">Let's <span class="accent-text">talk.</span></h1><p class="lede">Tell us a little about what you're planning. {{ site.responsePromise }}</p></div></section>
 <section class="section tight"><div class="wrap split">
   <div class="contact-list">
     <p class="label">Call</p><p><a class="big-link" href="tel:{{ site.phone | tel }}">{{ site.phone }}</a></p>
     <p class="label">Text</p><p><a class="big-link" href="sms:{{ site.phone | tel }}">{{ site.phone }}</a></p>
     {% if site.email %}<p class="label">Email</p><p><a class="big-link" href="mailto:{{ site.email }}">{{ site.email }}</a></p>{% endif %}
     {% if site.brokerageAddress %}<p class="label">Office</p><p>{{ site.brokerageAddress }}</p>{% endif %}
-    <p class="label">Selling or buying?</p><p><a class="link-line" href="/home-value/">Home valuation</a> &nbsp; <a class="link-line" href="/buy/">Buyer search</a></p>
+    <p class="label">Selling or buying?</p><p><a class="link-arrow" href="/home-value/">Home valuation</a> &nbsp; <a class="link-arrow" href="/buy/">Buyer search</a></p>
   </div>
   <div class="inquiry">{% include "form.njk" %}</div>
 </div></section>

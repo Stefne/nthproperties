@@ -49,6 +49,20 @@ To change status, edit `status:` (Active, Coming Soon, Pending, Sold). `featured
 
 The two `sample-*.md` listings and `blog/sample-post.md` are drafts for layout preview only. Delete them once real content exists.
 
+## Sales history (Track Record page + home page map)
+
+`src/_data/sales.csv` holds every closed sale, one row each. Keep a Google Sheet with the same columns and paste it in (File > Download > CSV), or edit the file in GitHub. Stats on the site (total volume, homes sold, average price, cities) are calculated from this file automatically, so they're always real.
+
+Columns: `address, city, price, date, side, type, beds, baths, sqft, lat, lng, photo, draft`. `lat`/`lng` put the sale on the map: right-click the address in Google Maps and click the coordinates to copy them. `photo` is optional. The six sample rows have `draft` = `yes` and only show in local previews; delete them once real sales are in.
+
+## Staging & Design page
+
+Built at `/design/`, hidden on the live site until `showDesign: true` in `site.js`. Before/after pairs live in `src/_data/design.json` (drag the slider to compare).
+
+## Searching all homes (IDX)
+
+`idxSearchUrl` in `site.js` points the "Search all homes" links at a full-market search page (your brokerage's free IDX search or a paid IDX vendor). Blank = sends people to the buyer search request form.
+
 ## Other content
 
 - Blog post: new `.md` file in `src/blog/` (copy `sample-post.md`, remove `draft: true`).

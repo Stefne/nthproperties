@@ -1,0 +1,23 @@
+---
+layout: base.njk
+title: Staging & Design
+
+summary: Nth Properties stages its own listings in-house. See before-and-after transformations.
+---
+{% set projects = design.projects %}
+<section class="page-head"><div class="wrap"><p class="kicker">Staging &amp; design</p><h1 class="h-hero">Staged in-house. <span class="accent-text">Priced like it.</span></h1><p class="lede">{{ design.intro }}</p></div></section>
+<section class="section tight"><div class="wrap">
+  {% for p in projects %}{% if not (p.draft and eleventy.env.runMode == "build") %}
+  <figure class="ba">
+    <div class="ba-frame" data-ba>
+      <img src="{{ p.after }}" alt="{{ p.title }}, after staging" sizes="(min-width: 1100px) 1100px, 100vw">
+      <div class="ba-before"><img src="{{ p.before }}" alt="{{ p.title }}, before" sizes="(min-width: 1100px) 1100px, 100vw"></div>
+      <input type="range" min="0" max="100" value="50" aria-label="Before and after slider">
+      <span class="ba-tag l mono small">Before</span><span class="ba-tag r mono small">After</span>
+    </div>
+    <figcaption><strong>{{ p.title }}</strong> <span class="muted">{{ p.note }}</span></figcaption>
+  </figure>
+  {% endif %}{% endfor %}
+  <div class="unsure"><div><strong>Selling soon?</strong> <span class="muted">Staging is part of how we list. Ask what it would look like for your home.</span></div><a class="btn btn-sm" href="/home-value/">Start with a home value</a></div>
+</div></section>
+{% include "cta.njk" %}

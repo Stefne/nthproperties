@@ -10,6 +10,8 @@ export default {
   brokerageAddress: "", // TODO: firm office address
   web3formsKey: "",     // TODO: free key from https://web3forms.com (sends form leads to your email)
   cfAnalyticsToken: "", // Cloudflare dashboard > Web Analytics > Add site > copy the token from the snippet
+  idxSearchUrl: "",     // "Search all homes" link: your brokerage IDX search page (free) or an IDX vendor page. Blank = buyer search form.
+  showDesign: false,    // Staging & Design page; flip to true once Stephanie signs off
   responsePromise: "We reply within one business day.",
 
   // Proof band on the home page. Only real, defensible numbers. Set showStats: true once filled.

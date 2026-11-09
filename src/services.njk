@@ -4,10 +4,10 @@ title: Services
 permalink: /services/
 summary: Buying, selling, investing, property management, land and development across Greater Seattle.
 ---
-<section class="page-head"><div class="wrap"><p class="eyebrow">What we do</p><h1>One team for the <em>whole life</em> of a property.</h1><p class="lede">Buying it, improving it, renting it, and selling it.</p></div></section>
+<section class="page-head"><div class="wrap"><p class="kicker">What we do</p><h1 class="h-hero">One team for the <span class="accent-text">whole life</span> of a property.</h1><p class="lede">Buying it, improving it, renting it, and selling it.</p></div></section>
 <section class="section tight"><div class="wrap">
   {% for s in services %}
-  <div class="service-row"><span class="svc-num">0{{ loop.index }}</span><h2 class="h3">{{ s.title }}</h2><p>{{ s.text }}</p><a class="link-line" href="{{ '/home-value/' if s.title == 'Selling' else ('/buy/' if s.title == 'Buying' else '/contact/?topic=' + (s.title | urlencode)) }}">{{ 'Get a valuation' if s.title == 'Selling' else ('Start a search' if s.title == 'Buying' else 'Talk to us') }}</a></div>
+  <div class="service-row" id="{{ s.title | slug2 }}"><span class="svc-num">0{{ loop.index }}</span><h2 class="h3">{{ s.title }}</h2><p>{{ s.text }}</p><a class="link-arrow" href="{{ '/home-value/' if s.title == 'Selling' else ('/buy/' if s.title == 'Buying' else '/contact/?topic=' + (s.title | urlencode)) }}">{{ 'Get a valuation' if s.title == 'Selling' else ('Start a search' if s.title == 'Buying' else 'Talk to us') }}</a></div>
   {% endfor %}
 </div></section>
 {% include "cta.njk" %}

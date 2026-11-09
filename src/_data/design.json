@@ -1,0 +1,7 @@
+{
+  "intro": "We stage our own listings. Furniture, art, lighting, and layout are chosen for the home and the buyer most likely to pay the most for it, not pulled from a warehouse catalog.",
+  "lead": "TODO: Stephanie's name/title and a short bio if they want a feature here.",
+  "projects": [
+    { "title": "Sample: West Bellevue living room", "before": "/assets/img/placeholder.svg", "after": "/assets/img/placeholder.svg", "note": "Sample pair. Replace with real before/after photos.", "draft": true }
+  ]
+}

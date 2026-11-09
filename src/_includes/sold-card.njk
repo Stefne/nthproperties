@@ -1,0 +1,5 @@
+<article class="sold-card">
+  {% set sp = s.photo | photo %}
+  <div class="sold-img{% if not sp %} blueprint{% endif %}">{% if sp %}<img src="{{ sp }}" alt="{{ s.address }}" sizes="320px">{% else %}<span class="mono">{{ s.city }}</span>{% endif %}<span class="chip">Sold {{ s.date | year }}</span></div>
+  <div class="sold-body"><p class="price">${{ s.price | num }}</p><p class="mono small">{{ s.address }} · {{ s.city }}</p><p class="mono small muted">{% if s.beds %}{{ s.beds }} bd · {% endif %}{% if s.baths %}{{ s.baths }} ba · {% endif %}{{ s.side }} side</p></div>
+</article>

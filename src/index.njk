@@ -1,103 +1,138 @@
 ---
 layout: base.njk
-overHero: true
 bodyClass: home
 ---
-{% from "macros.njk" import media %}
-<section class="hero">
-  {{ media(site.photos.hero, "Puget Sound home at dusk", "hero-bg", true) }}
-  <div class="wrap hero-inner">
-    <p class="eyebrow light">Greater Seattle · Eastside · South Sound</p>
-    <h1>Real estate, guided by people who build, invest, and live here.</h1>
-    <p class="hero-sub">Local knowledge <span>|</span> Long-term thinking</p>
-    <div class="btn-row"><a class="btn btn-light" href="/listings/">Explore Properties</a><a class="btn btn-ghost" href="/home-value/">What's My Home Worth?</a></div>
-  </div>
-  <a class="scroll-cue" href="#intro" aria-label="Scroll down"></a>
-</section>
+{% from "macros.njk" import media, icon, arrow %}
+{% set active = collections.listings | withoutStatus("Sold") %}
+{% set stats = sales | salesStats %}
 
-<section class="section" id="intro">
-  <div class="wrap split split-media">
-    {{ media(site.photos.intro, "Bright Pacific Northwest living room", "tall", false, "(min-width: 820px) 45vw, 100vw") }}
-    <div>
-      <p class="eyebrow">A boutique real estate team</p>
-      <h2>Local knowledge.<br><em>Broader perspective.</em></h2>
-      <p>Most of our business comes from referrals, which means every client gets the kind of care that earns one. We have helped clients buy a first home, grow into a first investment, and keep building from there.</p>
-      <p>Our experience spans single-family, multi-family, land, construction, and short- and long-term rentals, so the advice you get accounts for what a property can become, not just what it is today.</p>
-      <a class="link-line" href="/team/">Meet the team</a>
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-card">
+      {{ media(site.photos.hero, "Puget Sound home at dusk", "hero-bg", true) }}
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <p class="kicker light">Nth Properties · Seattle, the Eastside &amp; South Sound</p>
+        <h1 class="h-hero">Buy, sell, build, invest.<br><span class="accent-text">To the Nth degree.</span></h1>
+        <div class="btn-row"><a class="btn btn-light" href="{{ site.idxSearchUrl or '/listings/' }}">Search homes {{ arrow() }}</a><a class="btn btn-glass" href="/home-value/">What's my home worth?</a></div>
+      </div>
+      <p class="coords mono" aria-hidden="true">47.6101° N, 122.2015° W</p>
     </div>
   </div>
 </section>
 
-{% if site.showStats %}
-<section class="stats">
-  <div class="wrap stats-row">{% for s in site.stats %}{% if s.value %}<div><strong>{{ s.value }}</strong><span>{{ s.label }}</span></div>{% endif %}{% endfor %}</div>
-</section>
-{% endif %}
-
-{% set feat = collections.listings | featured %}
-<section class="section ivory">
+<section class="section">
   <div class="wrap">
-    <div class="section-head"><div><p class="eyebrow">Featured Properties</p><h2>Our listings. <em>Your opportunity.</em></h2></div><a class="link-line" href="/listings/">View all listings</a></div>
-    {% if feat.length %}
-    <div class="grid cards">{% for item in feat | head(6) %}{% include "card.njk" %}{% endfor %}</div>
+    <p class="kicker"><span class="num">01</span> Start here</p>
+    <h2 class="h-xl">Welcome in.</h2>
+    <div class="paths">
+      {% for p in [
+        ["buy","Buy","Find your next home","Neighborhood-level pricing and a builder's eye on every showing.","/buy/"],
+        ["sell","Sell","Sell the right way","Pricing from real comps, prep ranked by return, staging done in-house.","/home-value/"],
+        ["invest","Invest","Build a portfolio","From first rental to multi-family: we run the numbers with you.","/services/#investing"],
+        ["build","Build & manage","Develop or manage","Land feasibility, new construction, long- and short-term rental management.","/services/#land-development"]
+      ] %}
+      <a class="path-card" href="{{ p[4] }}">{{ icon(p[0]) }}<span class="mono small">{{ p[1] }}</span><strong>{{ p[2] }}</strong><span class="muted">{{ p[3] }}</span><span class="path-go">{{ arrow() }}</span></a>
+      {% endfor %}
+    </div>
+    <div class="unsure"><div><strong>Not sure which is yours?</strong> <span class="muted">Tell us what you're thinking. We'll point you the right way.</span></div><div class="btn-row tight"><a class="btn btn-sm" href="/contact/?topic=consultation">Talk it through</a><a class="link-arrow" href="tel:{{ site.phone | tel }}">or call {{ site.phone }}</a></div></div>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="wrap">
+    <div class="section-head"><div><p class="kicker light"><span class="num">02</span> Now selling</p><h2 class="h-xl">On the market now.</h2></div><div class="carousel-nav"><button type="button" data-scroll="-1" aria-label="Previous">←</button><button type="button" data-scroll="1" aria-label="Next">→</button></div></div>
+    {% if active.length %}
+    <div class="carousel" data-carousel>{% for item in active %}{% include "card.njk" %}{% endfor %}</div>
     {% else %}
-    <div class="empty-state"><h3>New listings are on the way.</h3><p>Tell us what you're looking for and we'll send matches, including homes before they hit the market.</p><a class="btn" href="/buy/">Start a Search</a></div>
+    <div class="empty-state dark-empty"><h3>New listings are on the way.</h3><p>Tell us what you're looking for and we'll send matches, including homes before they hit the market.</p><a class="btn btn-light" href="/buy/">Start a custom search</a></div>
+    {% endif %}
+    <p class="after-carousel"><a class="link-arrow light" href="/listings/">All our listings {{ arrow() }}</a>{% if site.idxSearchUrl %} <a class="link-arrow light" href="{{ site.idxSearchUrl }}">Search every home on the market {{ arrow() }}</a>{% endif %}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap split split-media">
+    <div>
+      <p class="kicker"><span class="num">03</span> Who you work with</p>
+      <h2 class="h-xl">Have the partners on your side of the table.</h2>
+      <p class="lede">No hand-offs to a junior agent. You work directly with the two people whose names are on the business, and who build, remodel, and invest in this market themselves.</p>
+      <ul class="ticks"><li>Most of our business is referrals from past clients</li><li>Construction eyes on every showing and every listing</li><li>Long-term thinking: first home, first rental, and beyond</li></ul>
+      <a class="link-arrow" href="/team/">Meet the team {{ arrow() }}</a>
+    </div>
+    <div class="partner-card">
+      {% for m in team %}{% set mp = m.photo | photo %}
+      <div class="partner">
+        <div class="avatar">{% if mp %}<img src="{{ mp }}" alt="{{ m.name }}" sizes="96px">{% else %}<span>{{ m.name | initials }}</span>{% endif %}</div>
+        <div><p class="mono small muted">{{ m.role }}</p><p class="partner-name">{{ m.name }}</p></div>
+      </div>
+      {% endfor %}
+      <div class="partner-cta"><a class="btn" href="/contact/?topic=consultation">Book a consultation</a><a class="link-arrow" href="sms:{{ site.phone | tel }}">Text us {{ arrow() }}</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section paper">
+  <div class="wrap split split-media reverse">
+    {{ media(site.photos.valuation, "Staged living room", "rounded tall", false, "(min-width: 820px) 45vw, 100vw") }}
+    <div>
+      <p class="kicker"><span class="num">04</span> Selling with Nth</p>
+      <h2 class="h-xl">The sellers' team that also builds.</h2>
+      <p class="lede">We know what buyers pay for because we've done the work ourselves. Pricing from real comps, a prep plan ranked by return, and staging done in-house.</p>
+      <div class="btn-row"><a class="btn" href="/home-value/">Get your home value {{ arrow() }}</a>{% if site.showDesign %}<a class="link-arrow" href="/design/">See our staging {{ arrow() }}</a>{% endif %}</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><div><p class="kicker"><span class="num">05</span> Track record</p><h2 class="h-xl">Every dot is a home we've closed.</h2></div><a class="link-arrow" href="/sold/">Full sales history {{ arrow() }}</a></div>
+    {% if sales.length %}
+    <div class="map-wrap"><div class="map" data-map='{{ sales | jsonify }}'></div><div class="map-legend mono small"><span class="dot"></span> Closed sale</div></div>
+    <div class="stat-bar">
+      <div><strong>{{ stats.volume }}</strong><span>In closed sales</span></div>
+      <div><strong>{{ stats.count }}</strong><span>Homes sold</span></div>
+      <div><strong>{{ stats.avg }}</strong><span>Average sale price</span></div>
+      <div><strong>{{ stats.cities }}</strong><span>Cities served</span></div>
+    </div>
+    <div class="carousel sold-row" data-carousel>{% for s in sales | head(10) %}{% include "sold-card.njk" %}{% endfor %}</div>
+    {% else %}
+    <div class="empty-state">Add closed sales to <code>src/_data/sales.csv</code> to populate the map and stats.</div>
     {% endif %}
   </div>
 </section>
 
-<section class="section split-band">
-  <div class="wrap split split-media reverse">
-    {{ media(site.photos.valuation, "Craftsman home exterior", "tall", false, "(min-width: 820px) 45vw, 100vw") }}
-    <div>
-      <p class="eyebrow">For sellers</p>
-      <h2>What is your home <em>really</em> worth?</h2>
-      <p>Online estimates miss what matters: the remodel, the view, the block. Get a pricing analysis built from actual comparable sales and a walkthrough by someone who has built and remodeled homes.</p>
-      <ul class="checks"><li>Comparable-sales analysis, not an algorithm</li><li>Prep and upgrade advice ranked by return</li><li>No obligation, no pressure</li></ul>
-      <a class="btn" href="/home-value/">Request a Home Valuation</a>
-    </div>
-  </div>
-</section>
-
-<section class="section navy">
+<section class="section dark">
   <div class="wrap">
-    <div class="section-head"><div><p class="eyebrow light">What we do</p><h2>Full-service real estate</h2></div><a class="link-line light" href="/services/">All services</a></div>
-    <div class="grid three services">{% for s in services %}<div class="svc"><span class="svc-num">0{{ loop.index }}</span><h3>{{ s.title }}</h3><p>{{ s.text }}</p></div>{% endfor %}</div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <div class="section-head center-head"><div><p class="eyebrow">Where we work</p><h2>Explore the Puget Sound</h2></div></div>
-    <div class="grid four">{% for a in areas %}<a class="area-tile" href="/areas/{{ a.slug }}/">{{ media(a.photo, a.name, "area-bg", false, "(min-width: 1000px) 25vw, 50vw") }}<span class="area-text"><span class="label">{{ a.county }}</span><strong>{{ a.name }}</strong></span></a>{% endfor %}</div>
+    <div class="section-head"><div><p class="kicker light"><span class="num">06</span> Where we work</p><h2 class="h-xl">Seattle, the Eastside &amp; South Sound.</h2></div></div>
+    <div class="grid four">{% for a in areas %}<a class="area-tile" href="/areas/{{ a.slug }}/">{{ media(a.photo, a.name, "area-bg", false, "(min-width: 1000px) 25vw, 50vw") }}<span class="area-text"><span class="mono small">{{ a.county }}</span><strong>{{ a.name }}</strong></span></a>{% endfor %}</div>
   </div>
 </section>
 
 {% if site.showTestimonials %}
-<section class="section ivory">
+<section class="section">
   <div class="wrap narrow center">
-    <p class="eyebrow">Trusted by our clients</p>
-    <div class="quotes" data-quotes>{% for t in testimonials %}<blockquote class="quote{% if loop.first %} on{% endif %}"><p>“{{ t.quote }}”</p><footer><span class="label">{{ t.name }} · {{ t.detail }}</span></footer></blockquote>{% endfor %}</div>
+    <p class="kicker">Client words</p>
+    <div class="quotes" data-quotes>{% for t in testimonials %}<blockquote class="quote{% if loop.first %} on{% endif %}"><p>“{{ t.quote }}”</p><footer class="mono small">{{ t.name }} · {{ t.detail }}</footer></blockquote>{% endfor %}</div>
   </div>
 </section>
 {% endif %}
-
-<section class="report">
-  {{ media(site.photos.report, "", "report-bg") }}
-  <div class="wrap report-inner">
-    <div><p class="eyebrow light">Puget Sound Intelligence</p><h2>The market, read by people who work it every day.</h2><p>A short quarterly report on prices, inventory, and where we see opportunity. Straight to your inbox.</p></div>
-    <div>{% set formType = "newsletter" %}{% include "form.njk" %}</div>
-  </div>
-</section>
 
 {% if collections.posts.length %}
 <section class="section">
   <div class="wrap">
-    <div class="section-head"><div><p class="eyebrow">Insights</p><h2>From the journal</h2></div><a class="link-line" href="/blog/">All articles</a></div>
-    <div class="grid three">{% for p in collections.posts | head(3) %}<a class="post-tile" href="{{ p.url }}"><span class="label">{{ p.date | longDate }}</span><h3>{{ p.data.title }}</h3><p>{{ p.data.summary }}</p><span class="link-line">Read</span></a>{% endfor %}</div>
+    <div class="section-head"><div><p class="kicker"><span class="num">07</span> Blog</p><h2 class="h-xl">Notes from the field.</h2></div><a class="link-arrow" href="/blog/">All posts {{ arrow() }}</a></div>
+    <div class="grid three">{% for p in collections.posts | head(3) %}<a class="post-tile" href="{{ p.url }}"><span class="mono small muted">{{ p.date | longDate }}</span><h3>{{ p.data.title }}</h3><p class="muted">{{ p.data.summary }}</p><span class="link-arrow">Read {{ arrow() }}</span></a>{% endfor %}</div>
   </div>
 </section>
 {% endif %}
+
+<section class="section tight-top">
+  <div class="wrap"><div class="report-card">
+    <div><p class="kicker light">Puget Sound market report</p><h2>The market, read by people who work it every day.</h2><p>Quarterly. Prices, inventory, and where we see opportunity.</p></div>
+    <div>{% set formType = "newsletter" %}{% include "form.njk" %}</div>
+  </div></div>
+</section>
 
 {% include "cta.njk" %}
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"RealEstateAgent","name":"{{ site.name }}","url":"{{ site.url }}","telephone":"{{ site.phone }}","areaServed":[{% for a in areas %}"{{ a.name }}, WA"{% if not loop.last %},{% endif %}{% endfor %}]}</script>
