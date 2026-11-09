@@ -120,7 +120,7 @@ button.nav-top::after{content:"";width:5px;height:5px;border-right:1px solid cur
 .hc-main img{animation:slowzoom 26s ease-out both}
 @keyframes slowzoom{from{transform:scale(1.08)}to{transform:scale(1)}}
 .hc-inset{position:absolute!important;left:0;bottom:0;width:44%;aspect-ratio:1;border:10px solid var(--ivory);box-shadow:0 30px 60px -30px rgba(30,33,37,.4)}
-.hc-caption{position:absolute;right:-10px;top:50%;transform:translate(100%,-50%) rotate(90deg);transform-origin:left center;font:500 .62rem/1 var(--sans);letter-spacing:.4em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.hc-caption{position:absolute;right:-40px;top:50%;transform:translate(100%,-50%) rotate(90deg);transform-origin:left center;font:500 .62rem/1 var(--sans);letter-spacing:.4em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
 .hc-compass{position:absolute;right:-30px;top:-40px;width:150px;opacity:.5}
 @media (max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-collage{padding:0 18px 50px 34px}.hc-caption,.hc-compass{display:none}}
 
@@ -313,7 +313,7 @@ button.nav-top::after{content:"";width:5px;height:5px;border-right:1px solid cur
 /* ==== CTA band ==== */
 .cta-band{position:relative;isolation:isolate;color:rgba(255,255,255,.85);text-align:center;background:var(--navy)}
 .cta-bg{position:absolute!important;inset:0;z-index:-2}
-.cta-band::after{content:"";position:absolute;inset:0;z-index:-1;background:rgba(20,30,41,.55)}
+.cta-band::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(20,30,41,.72) 0%,rgba(20,30,41,.5) 55%,rgba(20,30,41,.35) 100%)}
 .cta-bg.media-empty{background:var(--navy)}.cta-bg.media-empty .art{color:var(--bronze-lt);opacity:.35;width:90%;max-width:1100px;align-self:end}
 .cta-inner{padding-top:clamp(100px,13vw,190px);padding-bottom:clamp(100px,13vw,190px)}
 .cta-band h2{color:#fff;font-size:clamp(2.6rem,6vw,5rem)}.cta-band h2 em{color:var(--bronze-lt)}
@@ -439,3 +439,10 @@ input:focus,select:focus,textarea:focus{outline:0;border-color:var(--bronze)}
 .reveal{opacity:0;transform:translateY(30px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
 .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+/* ==== Photo focal points (adjust when photos change) ==== */
+.hc-main img{object-position:30% 50%}
+.c-main img{object-position:38% 50%}
+.cta-bg img{object-position:50% 62%}
+.area-tile .area-bg img{object-position:50% 55%}
+.feature-band .fb-bg img{object-position:30% 50%}
