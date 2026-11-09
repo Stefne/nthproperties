@@ -1,0 +1,59 @@
+---
+layout: base.njk
+---
+{% from "macros.njk" import media, art, arrow %}
+<section class="guide-hero">
+  <div class="wrap guide-hero-grid">
+    <div class="guide-hero-text">
+      <p class="kicker">{{ kicker }}</p>
+      <h1 class="h-hero">{{ heading | safe }}</h1>
+      <p class="lede">{{ lede }}</p>
+      {% if heroCta %}<div class="btn-row"><a class="btn" href="{{ heroCta[1] }}">{{ heroCta[0] }} {{ arrow() }}</a>{% if heroCta2 %}<a class="link-arrow" href="{{ heroCta2[1] }}">{{ heroCta2[0] }} {{ arrow() }}</a>{% endif %}</div>{% endif %}
+    </div>
+    <div class="frame-stack">
+      {{ media(site.photos[photoKey], heading | striptags, "tall framed", true, "(min-width: 900px) 40vw, 100vw", drawing) }}
+      <div class="frame-art">{{ art(drawing) }}</div>
+    </div>
+  </div>
+</section>
+
+{% if steps %}
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><div><p class="kicker">The process</p><h2>{{ stepsTitle or "How it works" }}</h2></div></div>
+    <ol class="timeline">{% for s in steps %}<li><span class="tl-num">{{ "0" + loop.index if loop.index < 10 else loop.index }}</span><h3>{{ s.title }}</h3><p>{{ s.text }}</p></li>{% endfor %}</ol>
+  </div>
+</section>
+{% endif %}
+
+{% if pillars %}
+<section class="section paper">
+  <div class="wrap">
+    <div class="section-head"><div><p class="kicker">{{ pillarsKicker or "Why Nth" }}</p><h2>{{ pillarsTitle }}</h2></div></div>
+    <div class="pillars">{% for p in pillars %}<div class="pillar"><span class="pillar-num">{{ ["I","II","III","IV","V","VI"][loop.index0] }}</span><h3>{{ p.title }}</h3><p>{{ p.text }}</p></div>{% endfor %}</div>
+  </div>
+</section>
+{% endif %}
+
+{% if content | striptags | trim %}
+<section class="section"><div class="wrap narrow prose">{{ content | safe }}</div></section>
+{% endif %}
+
+{% if faqs %}
+<section class="section{% if not pillars %} paper{% endif %}">
+  <div class="wrap split">
+    <div><p class="kicker">Questions</p><h2>Asked often.</h2></div>
+    <div class="faqs">{% for f in faqs %}<details><summary>{{ f.q }}</summary><p>{{ f.a }}</p></details>{% endfor %}</div>
+  </div>
+</section>
+{% endif %}
+
+{% if formType %}
+<section class="section">
+  <div class="wrap split">
+    <div><p class="kicker">Next step</p><h2>{{ formTitle }}</h2><p class="lede">{{ formText }}</p><div class="form-art">{{ art(drawing) }}</div></div>
+    <div class="inquiry">{% include "form.njk" %}</div>
+  </div>
+</section>
+{% endif %}
+{% include "cta.njk" %}

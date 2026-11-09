@@ -1,6 +1,6 @@
 {# Set formType before including: general (default), showing, valuation, buyer, newsletter. Optional inquiryTopic. #}
 {% set ft = formType or "general" %}
-{% set subjects = { general: "New website inquiry", showing: "Showing request", valuation: "SELLER LEAD: Home valuation request", buyer: "BUYER LEAD: Search request", newsletter: "Market report signup" } %}
+{% set subjects = { general: "New website inquiry", showing: "Showing request", valuation: "SELLER LEAD: Home valuation request", buyer: "BUYER LEAD: Search request", newsletter: "Market report signup", "newsletter-light": "Market report signup" } %}
 <form class="form form-{{ ft }}" action="https://api.web3forms.com/submit" method="POST">
   <input type="hidden" name="access_key" value="{{ site.web3formsKey }}">
   <input type="hidden" name="subject" value="{{ subjects[ft] }}{% if inquiryTopic %}: {{ inquiryTopic }}{% endif %}">
@@ -9,8 +9,8 @@
   <input type="hidden" name="page" value="{{ site.url }}{{ page.url }}">
   <input type="hidden" name="redirect" value="{{ site.url }}/thanks/">
   <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
-  {% if ft == "newsletter" %}
-  <div class="inline-field"><label class="sr" for="nl-email">Email</label><input id="nl-email" type="email" name="email" placeholder="Email address" required autocomplete="email"><button class="btn" type="submit">Join</button></div>
+  {% if ft == "newsletter" or ft == "newsletter-light" %}
+  <div class="inline-field{% if ft == "newsletter-light" %} light{% endif %}"><label class="sr" for="nl-email">Email</label><input id="nl-email" type="email" name="email" placeholder="Email address" required autocomplete="email"><button class="btn" type="submit">Join</button></div>
   {% else %}
   <div class="row2">
     <label>Name<input name="name" required autocomplete="name"></label>

@@ -3,7 +3,8 @@ layout: base.njk
 title: Contact
 permalink: /contact/
 ---
-<section class="page-head"><div class="wrap"><p class="kicker">Get in touch</p><h1 class="h-hero">Let's <span class="accent-text">talk.</span></h1><p class="lede">Tell us a little about what you're planning. {{ site.responsePromise }}</p></div></section>
+{% from "macros.njk" import art as lineArt %}
+<section class="page-head art-head"><div class="wrap"><p class="kicker">Get in touch</p><h1 class="h-hero">Let's <span class="accent-text">talk.</span></h1><p class="lede">Tell us a little about what you're planning. {{ site.responsePromise }}</p></div>{{ lineArt("compass", "head-art") }}</section>
 <section class="section tight"><div class="wrap split">
   <div class="contact-list">
     <p class="label">Call</p><p><a class="big-link" href="tel:{{ site.phone | tel }}">{{ site.phone }}</a></p>

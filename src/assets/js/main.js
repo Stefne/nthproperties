@@ -58,7 +58,7 @@ addEventListener("scroll", onScroll, { passive: true }); onScroll();
 // Scroll reveal
 if ("IntersectionObserver" in window) {
   const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
-  $$(".section h2, .section .kicker, .path-card, .card, .area-tile, .area-card, .post-tile, .split-media > .media, .member, .partner-card, .stat-bar > div").forEach((el) => { el.classList.add("reveal"); io.observe(el); });
+  $$(".section h2, .section .kicker, .path-card, .card, .area-tile, .area-card, .post-row, .post-tile, .collage, .member, .stat-bar > div, .timeline li, .pillar, .fb-card, .insight-feature").forEach((el) => { el.classList.add("reveal"); io.observe(el); });
 }
 
 // Listing gallery

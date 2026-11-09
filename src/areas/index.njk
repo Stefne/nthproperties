@@ -3,8 +3,9 @@ layout: base.njk
 title: Areas We Serve
 permalink: /areas/
 ---
+{% from "macros.njk" import art as lineArt %}
 {% from "macros.njk" import media %}
-<section class="page-head"><div class="wrap"><p class="kicker">Where we work</p><h1 class="h-hero">Prices move <span class="accent-text">block by block.</span></h1><p class="lede">Here's how we think about each market.</p></div></section>
+<section class="page-head art-head"><div class="wrap"><p class="kicker">Where we work</p><h1 class="h-hero">Prices move <span class="accent-text">block by block.</span></h1><p class="lede">Here's how we think about each market.</p></div>{{ lineArt("skyline", "head-art") }}</section>
 <section class="section tight"><div class="wrap grid two">
   {% for a in areas %}<a class="area-card" href="/areas/{{ a.slug }}/">{{ media(a.photo, a.name, "wide", false, "(min-width: 900px) 50vw, 100vw") }}<div class="area-card-body"><span class="label">{{ a.county }}</span><h2 class="h3">{{ a.name }}</h2><p>{{ a.blurb }}</p><span class="link-arrow">Explore {{ a.name }}</span></div></a>{% endfor %}
 </div></section>

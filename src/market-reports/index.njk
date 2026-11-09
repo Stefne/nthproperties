@@ -1,0 +1,12 @@
+---
+layout: base.njk
+title: Market Reports
+permalink: /market-reports/
+---
+{% from "macros.njk" import art %}
+<section class="page-head art-head"><div class="wrap"><p class="kicker">Puget Sound intelligence</p><h1 class="h-hero">The market, <span class="accent-text">read closely.</span></h1><p class="lede">Quarterly reports on prices, inventory, and where we see opportunity across Seattle, the Eastside, and the South Sound.</p></div>{{ art("rainier", "head-art") }}</section>
+<section class="section tight"><div class="wrap split">
+  <div>{% if collections.reports.length %}<div class="report-list">{% for r in collections.reports %}<a class="report-row" href="{{ r.url }}"><span class="mono small muted">{{ r.date | longDate }}</span><h3>{{ r.data.title }}</h3><p class="muted">{{ r.data.summary }}</p></a>{% endfor %}</div>{% else %}<div class="empty-state">The first report is on its way. Subscribe to get it.</div>{% endif %}</div>
+  <div class="inquiry"><p class="kicker">Get the report</p><h3>Delivered quarterly.</h3><p class="muted">Short, specific, no spam.</p>{% set formType = "newsletter-light" %}{% include "form.njk" %}</div>
+</div></section>
+{% include "cta.njk" %}

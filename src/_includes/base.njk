@@ -14,11 +14,11 @@
 <meta property="og:url" content="{{ site.url }}{{ page.url }}">
 <meta property="og:image" content="{{ site.url }}{{ (photos[0] if photos else '/assets/img/og.png') }}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#14213D">
+<meta name="theme-color" content="#F5F1EA">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/style.css">
 {% block head %}{% endblock %}
 </head>
@@ -30,14 +30,15 @@
     <a class="logo" href="/" aria-label="{{ site.name }} home"><span class="logo-mark">N<sup>th</sup></span><span class="logo-text">Properties</span></a>
     <nav id="nav" class="nav" aria-label="Main">
       <div class="nav-group"><button type="button" class="nav-top">Buy</button>
-        <div class="nav-menu"><a href="{{ searchUrl }}">Search all homes</a><a href="/listings/">Our listings</a><a href="/buy/">Custom search request</a><a href="/areas/">Neighborhoods</a></div></div>
+        <div class="nav-menu"><a href="{{ searchUrl }}">Search all homes</a><a href="/listings/">Our listings</a><a href="/buyers/">Buyer guide</a><a href="/buy/">Custom search request</a><a href="/areas/">Neighborhoods</a></div></div>
       <div class="nav-group"><button type="button" class="nav-top">Sell</button>
-        <div class="nav-menu"><a href="/home-value/">What's my home worth?</a><a href="/sold/">Sold properties</a>{% if site.showDesign %}<a href="/design/">Staging &amp; design</a>{% endif %}</div></div>
+        <div class="nav-menu"><a href="/home-value/">What's my home worth?</a><a href="/sellers/">Seller guide</a><a href="/sold/">Sold properties</a>{% if site.showDesign %}<a href="/design/">Staging &amp; design</a>{% endif %}</div></div>
       <div class="nav-group"><button type="button" class="nav-top">Invest &amp; Build</button>
-        <div class="nav-menu"><a href="/services/#investing">Investing</a><a href="/services/#property-management">Property management</a><a href="/services/#land-development">Land &amp; development</a></div></div>
-      <a class="nav-top" href="/sold/">Track Record</a>
-      <a class="nav-top" href="/blog/">Blog</a>
-      <a class="nav-top" href="/team/">Team</a>
+        <div class="nav-menu"><a href="/investors/">Investors</a><a href="/builders/">Builders &amp; land</a><a href="/services/#property-management">Property management</a><a href="/services/">All services</a></div></div>
+      <div class="nav-group"><button type="button" class="nav-top">Insights</button>
+        <div class="nav-menu"><a href="/market-reports/">Market reports</a><a href="/blog/">Blog</a><a href="/sold/">Track record</a></div></div>
+      <div class="nav-group"><button type="button" class="nav-top">About</button>
+        <div class="nav-menu"><a href="/about/">Our story</a><a href="/team/">Team</a><a href="/contact/">Contact</a></div></div>
       <a class="nav-phone" href="tel:{{ site.phone | tel }}">{{ site.phone }}</a>
       <a class="btn btn-sm" href="/contact/?topic=consultation">Let's talk</a>
     </nav>
@@ -48,6 +49,7 @@
 {{ content | safe }}
 </main>
 <footer class="site-footer">
+  <div class="footer-art" aria-hidden="true">{% from "macros.njk" import art %}{{ art("skyline") }}</div>
   <div class="wrap footer-top">
     <a class="logo" href="/"><span class="logo-mark">N<sup>th</sup></span><span class="logo-text">Properties</span></a>
     <p class="footer-tag">{{ site.tagline }}</p>
@@ -62,7 +64,7 @@
     </div>
     <div>
       <h4>Explore</h4>
-      <a href="/listings/">Listings</a><a href="/sold/">Track record</a><a href="/home-value/">Home valuation</a><a href="/buy/">Buyer search</a><a href="/services/">Services</a><a href="/team/">Team</a><a href="/blog/">Blog</a>{% if site.showDesign %}<a href="/design/">Staging &amp; design</a>{% endif %}
+      <a href="/listings/">Listings</a><a href="/buyers/">Buyer guide</a><a href="/sellers/">Seller guide</a><a href="/investors/">Investors</a><a href="/builders/">Builders &amp; land</a><a href="/sold/">Track record</a><a href="/market-reports/">Market reports</a><a href="/blog/">Blog</a><a href="/about/">Our story</a>{% if site.showDesign %}<a href="/design/">Staging &amp; design</a>{% endif %}
     </div>
     <div>
       <h4>Areas</h4>

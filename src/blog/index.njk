@@ -3,7 +3,8 @@ layout: base.njk
 title: Blog
 permalink: /blog/
 ---
-<section class="page-head"><div class="wrap"><p class="kicker">Blog</p><h1 class="h-hero">Notes from the field.</h1><p class="lede">Puget Sound market notes, buyer and seller guides, and investing.</p></div></section>
+{% from "macros.njk" import art as lineArt %}
+<section class="page-head art-head"><div class="wrap"><p class="kicker">Blog</p><h1 class="h-hero">Notes from the field.</h1><p class="lede">Puget Sound market notes, buyer and seller guides, and investing.</p></div>{{ lineArt("rainier", "head-art") }}</section>
 <section class="section tight"><div class="wrap">
   {% if collections.posts.length %}
   <div class="grid three">{% for p in collections.posts %}<a class="post-tile" href="{{ p.url }}"><span class="label">{{ p.date | longDate }}</span><h3>{{ p.data.title }}</h3><p>{{ p.data.summary }}</p></a>{% endfor %}</div>

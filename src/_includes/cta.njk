@@ -1,6 +1,10 @@
+{% from "macros.njk" import media, art %}
 <section class="cta-band">
+  {{ media(site.photos.cta, "", "cta-bg", false, "100vw", "rainier") }}
   <div class="wrap cta-inner">
-    <div><p class="kicker light">Ready when you are</p><h2 class="h-xl">Make Nth your first call.</h2><p>Tell us your goal. One of the partners will lay out a plan, no pressure.</p></div>
-    <div class="btn-row"><a class="btn btn-light" href="/contact/?topic=consultation">Book a consultation</a><a class="btn btn-glass" href="tel:{{ site.phone | tel }}">Call {{ site.phone }}</a></div>
+    <p class="kicker light center-k">Ready when you are</p>
+    <h2>Make Nth your <em>first call.</em></h2>
+    <p>Tell us your goal. One of the partners will lay out a plan, no pressure.</p>
+    <div class="btn-row center"><a class="btn btn-light" href="/contact/?topic=consultation">Book a consultation</a><a class="btn btn-ghost" href="tel:{{ site.phone | tel }}">Call {{ site.phone }}</a></div>
   </div>
 </section>

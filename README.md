@@ -18,19 +18,32 @@ The build prints a warning until the required fields are filled in. Replace the 
 
 ## Photo slots
 
-Upload a JPG to any of these paths and it appears automatically. Until then a styled navy panel shows. Any size works; the build resizes and converts to WebP.
+Upload a JPG to any of these paths (GitHub: open the folder, Add file > Upload files) and it appears on the next build. Any size works; the build resizes and converts to WebP. Until a photo exists, the slot shows a line drawing on stone, so nothing ever looks broken.
 
-| Path | Where it shows | Suggested subject |
-|---|---|---|
-| `src/assets/img/site/hero.jpg` | Home page hero, full screen | Twilight exterior or skyline, landscape, 2400px+ wide |
-| `src/assets/img/site/intro.jpg` | Home "Local knowledge" section (portrait crop) | Interior or the two of you |
-| `src/assets/img/site/home-value.jpg` | Home seller section + /home-value/ hero | Classic NW home exterior |
-| `src/assets/img/site/market-report.jpg` | Market report band | Aerial / water / skyline |
-| `src/assets/img/site/cta.jpg` | "Considering a move" band on every page | Mount Rainier or Sound at dusk |
-| `src/assets/img/site/areas/seattle.jpg` (bellevue, kent, tacoma) | Area tiles and area page heroes | Recognizable local scene |
-| `src/assets/img/team/stefne.jpg`, `zach.jpg` | Team page + agent card on listings | Headshot, portrait 4:5 |
+| Upload to `src/assets/img/site/` | Where it shows | Shape | Suggested subject |
+|---|---|---|---|
+| `hero.jpg` | Home hero, main framed photo | Portrait 4:5 | Twilight exterior or striking interior |
+| `hero-detail.jpg` | Home hero, small overlapping photo | Square | Material detail: stone, wood, a door handle |
+| `intro.jpg` | Home "Local knowledge" | Portrait 4:5 | The two of you, or an interior |
+| `intro-detail.jpg` | Small overlapping photo next to it | Square | Detail shot |
+| `home-value.jpg` | Full-width seller band + /home-value/ | Landscape | Classic NW home exterior |
+| `market-report.jpg` | Market report tile | Landscape | Aerial, water, or skyline |
+| `cta.jpg` | "Make Nth your first call" band, every page | Wide landscape | Rainier or the Sound at dusk |
+| `about.jpg` | /about/ | Portrait | The two of you |
+| `buyers.jpg`, `sellers.jpg`, `investors.jpg`, `builders.jpg`, `design.jpg` | Guide page heroes | Portrait | Matching subject |
+| `areas/seattle.jpg`, `bellevue.jpg`, `kent.jpg`, `tacoma.jpg` | Neighborhood tiles + area heroes | Portrait | Recognizable local scene |
 
-Free commercial-use stock: unsplash.com (credit optional). Your own professional photos convert better.
+Headshots go in `src/assets/img/team/` as `stefne.jpg` and `zach.jpg` (portrait 4:5).
+
+Free commercial-use stock: unsplash.com. Your own professional photos convert better.
+
+## Guide pages
+
+`/buyers/`, `/sellers/`, `/investors/`, `/builders/`, `/about/` are each one file in `src/` (e.g. `src/sellers.njk`). Steps, pillars, and FAQs are plain lists at the top of the file. `/about/` has TODO placeholder copy for your story.
+
+## Market reports
+
+One file per quarter in `src/market-reports/` (copy `sample-q3-2026.md`, remove `draft: true`). Fill the area table from NWMLS stats and write a few short paragraphs.
 
 ## Lead forms
 

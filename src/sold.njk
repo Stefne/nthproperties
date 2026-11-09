@@ -4,9 +4,10 @@ title: Track Record
 permalink: /sold/
 summary: Homes Nth Properties has sold across Seattle, the Eastside, and the South Sound.
 ---
+{% from "macros.njk" import art as lineArt %}
 {% set stats = sales | salesStats %}
 {% set soldListings = collections.listings | withStatus("Sold") %}
-<section class="page-head"><div class="wrap"><p class="kicker">Sold properties</p><h1 class="h-hero">Every kind of home, <span class="accent-text">recently sold.</span></h1></div></section>
+<section class="page-head art-head"><div class="wrap"><p class="kicker">Sold properties</p><h1 class="h-hero">Every kind of home, <span class="accent-text">recently sold.</span></h1></div>{{ lineArt("skyline", "head-art") }}</section>
 <section class="section tight">
   <div class="wrap">
     {% if sales.length %}

@@ -24,6 +24,7 @@ export default function (cfg) {
     api.getFilteredByGlob("src/listings/*.md").sort((a, b) =>
       (STATUS_RANK[a.data.status] ?? 9) - (STATUS_RANK[b.data.status] ?? 9) ||
       new Date(b.data.listed || 0) - new Date(a.data.listed || 0)));
+  cfg.addCollection("reports", (api) => api.getFilteredByGlob("src/market-reports/*.md").sort((a, b) => b.date - a.date));
   cfg.addCollection("posts", (api) =>
     api.getFilteredByGlob("src/blog/*.md").sort((a, b) => b.date - a.date));
 

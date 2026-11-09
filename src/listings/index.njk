@@ -4,7 +4,8 @@ title: Listings
 permalink: /listings/
 summary: Homes and properties represented by Nth Properties across Greater Seattle and the South Sound.
 ---
-<section class="page-head"><div class="wrap"><p class="kicker">Properties</p><h1 class="h-hero">Our listings. <span class="accent-text">Your opportunity.</span></h1></div></section>
+{% from "macros.njk" import art as lineArt %}
+<section class="page-head art-head"><div class="wrap"><p class="kicker">Properties</p><h1 class="h-hero">Our listings. <span class="accent-text">Your opportunity.</span></h1></div>{{ lineArt("modern", "head-art") }}</section>
 <section class="section tight">
   <div class="wrap">
     {% if collections.listings.length %}

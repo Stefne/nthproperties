@@ -1,0 +1,17 @@
+---
+layout: base.njk
+---
+{% from "macros.njk" import art %}
+<article class="section">
+  <div class="wrap narrow">
+    <p class="kicker"><a href="/market-reports/">Market reports</a> · {{ page.date | longDate }}</p>
+    <h1 class="h-hero">{{ title }}</h1>
+    {% if areas %}
+    <div class="table-wrap"><table class="sales-table"><thead><tr><th>Area</th><th>Median price</th><th>Year over year</th><th>Days on market</th><th>Active listings</th></tr></thead>
+    <tbody>{% for a in areas %}<tr><td>{{ a.name }}</td><td>{{ a.median or "—" }}</td><td>{{ a.change or "—" }}</td><td>{{ a.dom or "—" }}</td><td>{{ a.inventory or "—" }}</td></tr>{% endfor %}</tbody></table></div>
+    <p class="fine">Source: NWMLS. Figures for single-family homes unless noted.</p>
+    {% endif %}
+    <div class="prose mt">{{ content | safe }}</div>
+  </div>
+</article>
+{% include "cta.njk" %}

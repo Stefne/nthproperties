@@ -27,11 +27,19 @@ export default {
 
   // Photo slots. Drop a JPG at each path and it appears automatically; until then a styled panel shows.
   photos: {
-    hero: "/assets/img/site/hero.jpg",
-    intro: "/assets/img/site/intro.jpg",
-    valuation: "/assets/img/site/home-value.jpg",
-    report: "/assets/img/site/market-report.jpg",
-    cta: "/assets/img/site/cta.jpg",
+    hero: "/assets/img/site/hero.jpg",               // home hero, large landscape
+    heroDetail: "/assets/img/site/hero-detail.jpg",  // home hero inset, interior detail (portrait)
+    intro: "/assets/img/site/intro.jpg",             // home "who we are", portrait
+    introDetail: "/assets/img/site/intro-detail.jpg",// small overlapping photo, square
+    valuation: "/assets/img/site/home-value.jpg",    // seller section + /home-value/
+    report: "/assets/img/site/market-report.jpg",    // market report band, landscape
+    cta: "/assets/img/site/cta.jpg",                 // closing band on every page, landscape
+    about: "/assets/img/site/about.jpg",             // /about/, the two of you
+    buyers: "/assets/img/site/buyers.jpg",           // /buyers/
+    sellers: "/assets/img/site/sellers.jpg",         // /sellers/
+    investors: "/assets/img/site/investors.jpg",     // /investors/
+    builders: "/assets/img/site/builders.jpg",       // /builders/, construction or land
+    design: "/assets/img/site/design.jpg",           // /design/ hero, staged interior
   },
 
   social: { instagram: "", facebook: "", linkedin: "", google: "" }, // full URLs; blank ones are hidden
